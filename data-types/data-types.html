@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="John Indika">
+<meta name="dcterms.date" content="2025-04-02">
+
+<title>R Data Types: The Foundation of Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-157f06a9bf98f23ba66cc9eff4d189f9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0f960abcc1e7fa804a9034df3e114f21.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-157f06a9bf98f23ba66cc9eff4d189f9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="icon" type="image/x-icon" href="https://stemresearchai.com/favicon.ico">
+
+
+
+<script>
+
+(function() {
+
+  // 🚫 Disable right-click
+
+  document.addEventListener("contextmenu", function(e) {
+
+    e.preventDefault();
+
+  });
+
+
+
+  // 🚫 Disable key shortcuts (copy, inspect, save)
+
+  document.addEventListener("keydown", function(e) {
+
+    if (
+
+      (e.ctrlKey || e.metaKey) &&
+
+      ["c", "x", "u", "s", "a", "p"].includes(e.key.toLowerCase())
+
+    ) {
+
+      e.preventDefault();
+
+    }
+
+
+
+    if (e.key === "F12") {
+
+      e.preventDefault();
+
+    }
+
+  });
+
+
+
+  // 🌗 Theme toggle button
+
+  const button = document.createElement('button');
+
+  button.innerHTML = '🌓';
+
+  button.style.cssText = `
+
+    position: fixed;
+
+    bottom: 20px;
+
+    right: 20px;
+
+    z-index: 9999;
+
+    padding: 12px 16px;
+
+    font-size: 20px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    cursor: pointer;
+
+    background: var(--bs-body-bg);
+
+    color: var(--bs-body-color);
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+
+  `;
+
+  document.body.appendChild(button);
+
+
+
+  const savedTheme = localStorage.getItem('quarto-theme');
+
+  if (savedTheme) {
+
+    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+
+  }
+
+
+
+  button.onclick = () => {
+
+    const current = document.documentElement.getAttribute('data-bs-theme');
+
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    document.documentElement.setAttribute('data-bs-theme', next);
+
+    localStorage.setItem('quarto-theme', next);
+
+  };
+
+})();
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-right">
+      <h1 class="title">R Data Types: The Foundation of Programming</h1>
+            <p class="subtitle lead"><em>A Complete Guide to R’s Core Data Types and Their Practical Applications</em></p>
+                      </div>
+  </div>
+    
+  <div class="quarto-title-meta-author column-page-right">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">John Indika </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              <a href="https://stemresearchai.com" target="_blank">STEM Research</a>
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta column-page-right">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 2, 2025</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">April 11, 2026</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">📚 Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#double" id="toc-double" class="nav-link" data-scroll-target="#double"><span class="header-section-number">2</span> Double</a></li>
+  <li><a href="#integer" id="toc-integer" class="nav-link" data-scroll-target="#integer"><span class="header-section-number">3</span> Integer</a></li>
+  <li><a href="#character" id="toc-character" class="nav-link" data-scroll-target="#character"><span class="header-section-number">4</span> Character</a></li>
+  <li><a href="#logical" id="toc-logical" class="nav-link" data-scroll-target="#logical"><span class="header-section-number">5</span> Logical</a>
+  <ul class="collapse">
+  <li><a href="#conditional-logic" id="toc-conditional-logic" class="nav-link" data-scroll-target="#conditional-logic"><span class="header-section-number">5.1</span> Conditional Logic</a>
+  <ul class="collapse">
+  <li><a href="#logical-operators" id="toc-logical-operators" class="nav-link" data-scroll-target="#logical-operators"><span class="header-section-number">5.1.1</span> Logical Operators</a></li>
+  <li><a href="#relational-comparison-operators" id="toc-relational-comparison-operators" class="nav-link" data-scroll-target="#relational-comparison-operators"><span class="header-section-number">5.1.2</span> Relational (Comparison) Operators</a></li>
+  <li><a href="#membership-and-other-special-operators" id="toc-membership-and-other-special-operators" class="nav-link" data-scroll-target="#membership-and-other-special-operators"><span class="header-section-number">5.1.3</span> Membership and Other Special Operators</a></li>
+  </ul></li>
+  <li><a href="#operator-precedence" id="toc-operator-precedence" class="nav-link" data-scroll-target="#operator-precedence"><span class="header-section-number">5.2</span> Operator Precedence</a></li>
+  </ul></li>
+  <li><a href="#complex" id="toc-complex" class="nav-link" data-scroll-target="#complex"><span class="header-section-number">6</span> Complex</a></li>
+  <li><a href="#raw" id="toc-raw" class="nav-link" data-scroll-target="#raw"><span class="header-section-number">7</span> Raw</a></li>
+  <li><a href="#functions-for-inspecting-data-types" id="toc-functions-for-inspecting-data-types" class="nav-link" data-scroll-target="#functions-for-inspecting-data-types"><span class="header-section-number">8</span> Functions for Inspecting Data Types</a></li>
+  <li><a href="#type-coercion" id="toc-type-coercion" class="nav-link" data-scroll-target="#type-coercion"><span class="header-section-number">9</span> Type Coercion</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
+
+
+
+
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>R has <strong>six atomic data types</strong> (also called “atomic vectors” when multiple values are combined). Think of these as the alphabet of the R language — every complex object you’ll ever create is built from these fundamental building blocks. Even sophisticated structures like dates, factors, matrices, and data frames are simply <strong>classes</strong> constructed on top of these six core data types. We’ll explore each one in Sections 1.1 through 1.6 below.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>✅ Understand the various data types in R.<br>
+✅ Use appropriate R functions to create each of the data types.<br>
+✅ Use the <strong>typeof</strong> and <strong>class</strong> functions to check the data type.<br>
+✅ Understand missing data and other special values in R.<br>
+✅ Convert between data types.</p>
+</div>
+</div>
+</section>
+<section id="double" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Double</h1>
+<p><strong>🔹 Definition</strong></p>
+<p>A double (or numeric) represents real numbers, including those with decimal values. This is the default numeric type in R.</p>
+<ul>
+<li>Default numeric type in R</li>
+<li>64-bit double precision (approximately 15-16 significant digits)</li>
+<li>Examples: <code>3.14</code>, <code>-42.5</code>, <code>2.9979e8</code> (scientific notation)</li>
+</ul>
+<p><strong>🔹 Syntax</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fl">18.342</span> <span class="co"># has decimals</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p><strong>🔹 Key Notes</strong></p>
+<ul>
+<li>Can store decimals</li>
+<li>Higher precision than integers</li>
+<li>Used in most mathematical computations</li>
+</ul>
+<p><strong>🔹 Real-World Examples</strong></p>
+<ul>
+<li>Temperature in degrees → <code>36.8</code></li>
+<li>Bank balance → <code>10431.75</code></li>
+<li>Height in meters → <code>1.58</code></li>
+<li>The constant <code>pi</code> → <code>3.141593</code></li>
+</ul>
+<p><strong>🔹 Special Numeric Values</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 25%">
+<col style="width: 36%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">When It Occurs</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>Inf</code></td>
+<td style="text-align: left;">Positive infinity</td>
+<td style="text-align: left;">Division by zero</td>
+<td style="text-align: left;"><code>1 / 0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>-Inf</code></td>
+<td style="text-align: left;">Negative infinity</td>
+<td style="text-align: left;">Division by negative zero</td>
+<td style="text-align: left;"><code>-1 / 0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>NaN</code></td>
+<td style="text-align: left;">Not a Number</td>
+<td style="text-align: left;">Indeterminate form</td>
+<td style="text-align: left;"><code>0 / 0 OR log(-4)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>NA</code></td>
+<td style="text-align: left;">Missing value</td>
+<td style="text-align: left;">Missing data</td>
+<td style="text-align: left;"><code>as.numeric(NA)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>🔹 Code Examples</strong></p>
+<p><em>Calculate the total price including 16% value added tax (VAT):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>price <span class="ot">&lt;-</span> <span class="fl">19.99</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tax_rate <span class="ot">&lt;-</span> <span class="fl">0.16</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> price <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> tax_rate)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.1884</code></pre>
+</div>
+</div>
+<p><em>Calculate the body mass index (BMI) given weight in kg and height in metres:</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fl">68.5</span> <span class="co"># kilograms</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fl">1.74</span> <span class="co"># metres</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>bmi <span class="ot">&lt;-</span> weight <span class="sc">/</span> height<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(bmi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.62518</code></pre>
+</div>
+</div>
+<p><em>Calculate the p-value from a z-score (two-tailed test):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>z_score <span class="ot">&lt;-</span> <span class="fl">1.96</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z_score))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04999579</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Practice Problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Calculate the <strong>percentage change</strong> between a pre-test score of <strong>63.7</strong> and a post-test score of <strong>82.4</strong>.</li>
+<li>Calculate the mean and standard deviation for the following dataset: <code>43, 65, 54, 76, 39, 48, 52</code>.</li>
+<li>A product costs <strong>KES 1,250.75</strong> and is discounted by <strong>12.5%</strong>. What is the final price?</li>
+<li>An athlete completes a race in <strong>2.35 hours</strong>. Convert this time into minutes.</li>
+<li>A tank contains <strong>45.8 liters</strong> of water. If <strong>12.6 liters</strong> are used, how much remains?</li>
+<li>A newborn baby weighs <strong>2849 grams</strong>. What is the weight in <strong>kilograms</strong>?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a - Percentage change</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pre_test <span class="ot">&lt;-</span> <span class="fl">63.7</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>post_test <span class="ot">&lt;-</span> <span class="fl">82.4</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>percent_change <span class="ot">&lt;-</span> ((post_test <span class="sc">-</span> pre_test) <span class="sc">/</span> pre_test) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percent_change)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29.35636</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># b - Mean and standard deviation (SD)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">43</span>, <span class="dv">65</span>, <span class="dv">54</span>, <span class="dv">76</span>, <span class="dv">39</span>, <span class="dv">48</span>, <span class="dv">52</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(data)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>std <span class="ot">&lt;-</span> <span class="fu">sd</span>(data)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Mean = "</span>, avg))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mean = 53.8571428571429"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"SD = "</span>, std))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "SD = 12.8507920823137"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c - Discounted price</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>original_price <span class="ot">&lt;-</span> <span class="fl">1250.75</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>discount_percent <span class="ot">&lt;-</span> <span class="fl">12.5</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>discount_amount <span class="ot">&lt;-</span> original_price <span class="sc">*</span> (discount_percent <span class="sc">/</span> <span class="dv">100</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>final_price <span class="ot">&lt;-</span> original_price <span class="sc">-</span> discount_amount</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_price)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1094.406</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d - Hours to minutes</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>hours <span class="ot">&lt;-</span> <span class="fl">2.35</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>minutes <span class="ot">&lt;-</span> hours <span class="sc">*</span> <span class="dv">60</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(minutes) <span class="co"># this though whole number is stored as double data type</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 141</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># e - Remaining water</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>initial_water <span class="ot">&lt;-</span> <span class="fl">45.8</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>used_water <span class="ot">&lt;-</span> <span class="fl">12.6</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>remaining_water <span class="ot">&lt;-</span> initial_water <span class="sc">-</span> used_water</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(remaining_water)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 33.2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># f - Grams to kilograms</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>weight_grams <span class="ot">&lt;-</span> <span class="dv">2849</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> weight_grams <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(weight_kg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.849</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="integer" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Integer</h1>
+<p><strong>🔹 Definition</strong></p>
+<p>An integer in R represents whole numbers (no decimals), such as counts or discrete values.</p>
+<ul>
+<li>Stored internally as 32-bit signed values</li>
+<li>Must be explicitly declared using <code>L</code> suffix</li>
+<li>Examples: <code>42L</code>, <code>-7L</code>, <code>0L</code></li>
+<li>Range: <code>-2147483647</code> to <code>2147483647</code></li>
+</ul>
+<p><strong>🔹 Syntax</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>hh_size <span class="ot">&lt;-</span> <span class="dv">8</span>L <span class="co"># note the suffix L</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(hh_size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+</div>
+<p><strong>🔹 Key Notes</strong></p>
+<ul>
+<li>No fractional component</li>
+<li>Efficient for memory when working with large datasets</li>
+<li>Default numeric values in R are NOT integers unless specified</li>
+</ul>
+<p><strong>🔹 Real-World Examples</strong></p>
+<ul>
+<li>Number of students in a class → <code>45L</code></li>
+<li>Number of products sold → <code>1200L</code></li>
+<li>Number of meals taken in a day → <code>3L</code></li>
+<li>Number of mosquito nets distributed → <code>5</code></li>
+</ul>
+<p><strong>🔹 Code Examples</strong></p>
+<p><em>Calculate total calories</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>calories_breakfast <span class="ot">&lt;-</span> <span class="dv">450</span>L</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>calories_lunch <span class="ot">&lt;-</span> <span class="dv">680</span>L</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>total_calories <span class="ot">&lt;-</span> calories_breakfast <span class="sc">+</span> calories_lunch</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_calories)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1130</code></pre>
+</div>
+</div>
+<p><em>Calculate portfolio</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>tesla_shares <span class="ot">&lt;-</span> <span class="dv">50</span>L</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>apple_shares <span class="ot">&lt;-</span> <span class="dv">100</span>L</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>total_shares <span class="ot">&lt;-</span> tesla_shares <span class="sc">+</span> apple_shares</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_shares)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 150</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Practice Problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Why is it important to store values as integers in R (where applicable)?</li>
+<li>If a store has 543 units in stock and sells 127 units in a day, how many units remain in inventory?</li>
+<li>A customer buys 138 items at a unit price of 453. Calculate the total amount payable.</li>
+<li>If a bacterial cell divides every 20 minutes, starting with 1 cell, how many cells will be present after 2 hours? Express your answer as an integer.</li>
+<li>A meal contains 15 g of protein (4 kcal/g), 30 g of carbohydrates (4 kcal/g), and 10 g of fat (9 kcal/g). Calculate the total energy in kcal from the meal, storing intermediate values as integers where applicable.</li>
+<li>A car accelerates uniformly from rest at 3 m/s² for 8 seconds. Calculate the final velocity <span class="math inline">\((v = u + a t)\)</span>. Store acceleration and time as integers.</li>
+<li>A vendor buys 250 units at $12 each and sells all at $18 each. Calculate the total profit (Revenue − Cost). Store unit price differences as an integer before multiplying.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a - Importance of integers</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Saves memory</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Ensures exact representation without floating-point rounding errors</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Makes code more efficient for counting or indexing operations where decimal values are meaningless</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># b - Inventory</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>units_in_stock <span class="ot">&lt;-</span> <span class="dv">543</span>L</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>units_sold_today <span class="ot">&lt;-</span> <span class="dv">127</span>L</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>remaining_stock <span class="ot">&lt;-</span> units_in_stock <span class="sc">-</span> units_sold_today</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(remaining_stock)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 416</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c - Total amount payable</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>quantity <span class="ot">&lt;-</span> <span class="dv">138</span>L</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>unit_price <span class="ot">&lt;-</span> <span class="dv">453</span>L</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>amount <span class="ot">&lt;-</span> quantity <span class="sc">*</span> unit_price</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(amount)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 62514</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d. Bacterial cells after 2 hours (Biology)</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>initial_cells <span class="ot">&lt;-</span> <span class="dv">1</span>L</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>division_time_minutes <span class="ot">&lt;-</span> <span class="dv">20</span>L</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>total_time_minutes <span class="ot">&lt;-</span> <span class="dv">120</span>L</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>number_of_divisions <span class="ot">&lt;-</span> total_time_minutes <span class="sc">/</span> division_time_minutes</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>final_cells <span class="ot">&lt;-</span> initial_cells <span class="sc">*</span> (<span class="dv">2</span>L <span class="sc">^</span> number_of_divisions)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_cells)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># e. Total meal energy (Nutrition)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>protein_g <span class="ot">&lt;-</span> <span class="dv">15</span>L</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>carbs_g <span class="ot">&lt;-</span> <span class="dv">30</span>L</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>fat_g <span class="ot">&lt;-</span> <span class="dv">10</span>L</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>kcal_per_g_protein <span class="ot">&lt;-</span> <span class="dv">4</span>L</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>kcal_per_g_carbs <span class="ot">&lt;-</span> <span class="dv">4</span>L</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>kcal_per_g_fat <span class="ot">&lt;-</span> <span class="dv">9</span>L</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>energy_protein <span class="ot">&lt;-</span> protein_g <span class="sc">*</span> kcal_per_g_protein</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>energy_carbs <span class="ot">&lt;-</span> carbs_g <span class="sc">*</span> kcal_per_g_carbs</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>energy_fat <span class="ot">&lt;-</span> fat_g <span class="sc">*</span> kcal_per_g_fat</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>total_kcal <span class="ot">&lt;-</span> energy_protein <span class="sc">+</span> energy_carbs <span class="sc">+</span> energy_fat</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_kcal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 270</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># f. Final velocity (Physics)</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>initial_velocity <span class="ot">&lt;-</span> <span class="dv">0</span>L  <span class="co"># rest</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>acceleration <span class="ot">&lt;-</span> <span class="dv">3</span>L      <span class="co"># m/s²</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="dv">8</span>L              <span class="co"># seconds</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>final_velocity <span class="ot">&lt;-</span> initial_velocity <span class="sc">+</span> (acceleration <span class="sc">*</span> time)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(final_velocity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># g. Total profit (Economics)</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>units <span class="ot">&lt;-</span> <span class="dv">250</span>L</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>cost_per_unit <span class="ot">&lt;-</span> <span class="dv">12</span>L</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>selling_price_per_unit <span class="ot">&lt;-</span> <span class="dv">18</span>L</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>unit_profit <span class="ot">&lt;-</span> selling_price_per_unit <span class="sc">-</span> cost_per_unit</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>total_profit <span class="ot">&lt;-</span> units <span class="sc">*</span> unit_profit</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(total_profit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1500</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="character" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Character</h1>
+<p><strong>🔹 Definition</strong></p>
+<p>The character data type in R is used to store <strong>textual data (strings)</strong>, such as names, labels, codes, or any sequence of letters, numbers, and symbols enclosed in quotes.</p>
+<p><strong>🔹 Syntax</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">"STEM Research"</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p><strong>🔹 Key Notes</strong></p>
+<ul>
+<li>Must be enclosed in single (<code>' '</code>) or double (<code>" "</code>) quotes</li>
+<li>Numbers stored as characters are not numeric (e.g., <code>"123"</code> ≠ 123)</li>
+<li>Commonly used for categorical labels, identifiers, and descriptive data</li>
+</ul>
+<p><strong>🔹 Real-World Examples</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Why Character?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Patient name</td>
+<td style="text-align: left;"><code>"John Doe"</code></td>
+<td style="text-align: left;">Names contain letters, spaces, and sometimes hyphens or apostrophes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Email address</td>
+<td style="text-align: left;"><code>"user@example.com"</code></td>
+<td style="text-align: left;">Contains special characters (@, ., etc.) that cannot be numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Phone number</td>
+<td style="text-align: left;"><code>"+1-555-123-4567"</code></td>
+<td style="text-align: left;">Includes country codes, dashes, parentheses, or leading zeros</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Product SKU</td>
+<td style="text-align: left;"><code>"XL-BLUE-042"</code></td>
+<td style="text-align: left;">Mix of letters, hyphens, and numbers (where the number is an identifier, not a value)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Postal/ZIP code</td>
+<td style="text-align: left;"><code>"90210"</code> or <code>"SW1A 1AA"</code></td>
+<td style="text-align: left;">Can have leading zeros or letters; should not be used in arithmetic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Country code</td>
+<td style="text-align: left;"><code>"US"</code>, <code>"JP"</code>, <code>"DE"</code></td>
+<td style="text-align: left;">Two-letter codes are categorical labels, not mathematical values</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DNA sequence</td>
+<td style="text-align: left;"><code>"ATCGATCG"</code></td>
+<td style="text-align: left;">String of nucleotide letters representing genetic information</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ISBN (book ID)</td>
+<td style="text-align: left;"><code>"0-306-40615-2"</code></td>
+<td style="text-align: left;">Contains hyphens and a checksum character that may be “X”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Yes/No response</td>
+<td style="text-align: left;"><code>"Yes"</code>, <code>"No"</code></td>
+<td style="text-align: left;">Categorical text response from a survey</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🔹 Code Examples</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>country <span class="ot">&lt;-</span> <span class="st">"Kenya"</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>code <span class="ot">&lt;-</span> <span class="st">"A123"</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>number_as_text <span class="ot">&lt;-</span> <span class="st">"100"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Practice Problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Create a variable storing your institution name</li>
+<li>Check its data type</li>
+<li>Try adding <code>"100" + 50</code> and observe what happens</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>institution <span class="ot">&lt;-</span> <span class="st">"University of Nairobi"</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(institution)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "University of Nairobi"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># b</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(institution)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="st">"100"</span> <span class="sc">+</span> <span class="dv">50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `"100" + 50`:
+! non-numeric argument to binary operator</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="logical" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Logical</h1>
+<p><strong>🔹 Definition</strong></p>
+<p>A logical (or boolean) represents binary truth values: either <code>TRUE</code> or <code>FALSE.</code> Logical values are fundamental for conditional operations, filtering data, and control flow in R.</p>
+<ul>
+<li>Two possible values: <code>TRUE</code> (1) and <code>FALSE</code> (0)</li>
+<li>Can be abbreviated as <code>T</code> and <code>F</code> (not recommended for production code)</li>
+<li>Result of comparison and logical operators</li>
+<li>Examples: <code>TRUE</code>, <code>FALSE</code></li>
+</ul>
+<p><strong>🔹 Syntax</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>is_adult <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(is_adult)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p><strong>🔹 Key Notes</strong></p>
+<ul>
+<li>Used in conditional statements (<code>if</code>, <code>else</code>, <code>while</code>)</li>
+<li>Automatically coerces to integer in arithmetic: <code>TRUE</code> → 1, <code>FALSE</code> → 0</li>
+<li>Results from comparison operators: <code>&gt;</code>, <code>&lt;</code>, <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+<li>Can be combined with logical operators: <code>&amp;</code> (AND), <code>|</code> (OR), <code>!</code> (NOT)</li>
+</ul>
+<p><strong>🔹 Real-World Examples</strong></p>
+<ul>
+<li>Is the patient diabetic? → <code>TRUE</code></li>
+<li>Has the loan been approved? → <code>FALSE</code></li>
+<li>Is the temperature above 37°C? → <code>TRUE</code></li>
+<li>Did the student pass the exam? → <code>TRUE</code></li>
+<li>Is the baby underweight? → <code>FALSE</code></li>
+</ul>
+<section id="conditional-logic" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="conditional-logic"><span class="header-section-number">5.1</span> Conditional Logic</h2>
+<p>Conditional logic is the foundation of decision-making in programming, allowing R to evaluate conditions and execute different actions based on whether expressions are <code>TRUE</code> or <code>FALSE.</code> It is essential for building dynamic, intelligent, and rule-based systems.</p>
+<section id="logical-operators" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="logical-operators"><span class="header-section-number">5.1.1</span> Logical Operators</h3>
+<p>Logical operators in R enable the combination and evaluation of multiple conditions simultaneously. They form the backbone of complex decision-making by allowing expressions to be joined using <code>AND</code>, <code>OR</code>, and <code>NOT</code> logic.</p>
+</section>
+<section id="relational-comparison-operators" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="relational-comparison-operators"><span class="header-section-number">5.1.2</span> Relational (Comparison) Operators</h3>
+<p>Relational operators are used to compare values and determine their relationship, such as equality, inequality, or ordering. These comparisons produce logical outcomes (<code>TRUE</code> or <code>FALSE</code>) that drive conditional execution in R.</p>
+</section>
+<section id="membership-and-other-special-operators" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="membership-and-other-special-operators"><span class="header-section-number">5.1.3</span> Membership and Other Special Operators</h3>
+<p>Membership and special operators in R are used to test whether elements belong to a set, sequence, or structure, and to perform specialized operations that go beyond basic arithmetic and comparison. They are particularly useful in data filtering and pattern matching.</p>
+</section>
+</section>
+<section id="operator-precedence" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="operator-precedence"><span class="header-section-number">5.2</span> Operator Precedence</h2>
+<p>Operator precedence defines the hierarchy that R follows when evaluating expressions with multiple operators. Understanding this order is crucial to ensuring expressions are interpreted correctly and produce expected results without ambiguity.</p>
+<p><strong>🔹 Code Examples</strong></p>
+<p><em>Check if a customer qualifies for a senior discount (age ≥ 65):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">72</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>senior_discount <span class="ot">&lt;-</span> age <span class="sc">&gt;=</span> <span class="dv">65</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(senior_discount)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><em>Determine if a patient has a fever (temperature &gt; 38.0°C):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="fl">38.5</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>has_fever <span class="ot">&lt;-</span> temperature <span class="sc">&gt;</span> <span class="fl">38.0</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(has_fever)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><em>Check if a loan applicant meets multiple criteria (good credit AND stable income):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>credit_score <span class="ot">&lt;-</span> <span class="dv">620</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>stable_income <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>has_good_credit <span class="ot">&lt;-</span> credit_score <span class="sc">&gt;=</span> <span class="dv">700</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>loan_approved <span class="ot">&lt;-</span> has_good_credit <span class="sc">&amp;</span> stable_income</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(loan_approved)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p><em>Determine if a number is within a healthy BMI range (18.5 - 24.99):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>bmi <span class="ot">&lt;-</span> <span class="fl">28.3</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>healthy_bmi <span class="ot">&lt;-</span> bmi <span class="sc">&gt;=</span> <span class="fl">18.5</span> <span class="sc">&amp;</span> bmi <span class="sc">&lt;=</span> <span class="fl">24.9</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(healthy_bmi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p><em>Check if a transaction is suspicious (amount &gt; 10000 OR foreign_country = TRUE):</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>transaction_amount <span class="ot">&lt;-</span> <span class="dv">15000</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>is_foreign <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>suspicious <span class="ot">&lt;-</span> transaction_amount <span class="sc">&gt;</span> <span class="dv">10000</span> <span class="sc">|</span> is_foreign</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(suspicious)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Practice Problems
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>A patient’s blood pressure is 142/92. A doctor considers hypertension if systolic ≥ 140 OR diastolic ≥ 90. Write R code to determine if the patient has hypertension.</p></li>
+<li><p>A bank approves a loan if:</p>
+<ul>
+<li>Credit score ≥ 650 AND</li>
+<li>Annual income ≥ 30,000 AND</li>
+<li>Debt-to-income ratio &lt; 0.43</li>
+</ul>
+<p>Given:</p>
+<ul>
+<li>credit score = 720</li>
+<li>income = 45,000</li>
+<li>debt-to-income = 0.35</li>
+</ul>
+<p>Determine if the loan is approved.</p></li>
+<li><p>A customer gets a 20% discount if:</p>
+<ul>
+<li>They are a loyalty member OR</li>
+<li>Their cart total &gt; $100 OR</li>
+<li>It’s their birthday month (assume birthday month = TRUE)</li>
+</ul>
+<p>Given</p>
+<ul>
+<li>loyalty_member = FALSE</li>
+<li>cart_total = 85</li>
+<li>birthday_month = TRUE</li>
+</ul>
+<p>Determine discount.</p></li>
+<li><p>A product passes inspection if:</p>
+<ul>
+<li>Weight is between 9.8g and 10.2g (inclusive) AND</li>
+<li>Diameter is between 4.9cm and 5.1cm (inclusive)</li>
+</ul>
+<p>Given:</p>
+<ul>
+<li>weight = 10.05</li>
+<li>diameter = 5.12</li>
+</ul>
+<p>Does the product pass?</p></li>
+<li><p>A vehicle can use the express lane if:</p>
+<ul>
+<li>It has 3+ occupants OR</li>
+<li>It is an electric vehicle OR</li>
+<li>The driver paid for a premium pass</li>
+</ul>
+<p>Given</p>
+<ul>
+<li>occupants = 2</li>
+<li>is_electric = TRUE</li>
+<li>has_premium_pass = FALSE</li>
+</ul>
+<p>Can the vehicle use the express lane?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a: Hypertension screening</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>systolic <span class="ot">&lt;-</span> <span class="dv">142</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>diastolic <span class="ot">&lt;-</span> <span class="dv">92</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>has_hypertension <span class="ot">&lt;-</span> systolic <span class="sc">&gt;=</span> <span class="dv">140</span> <span class="sc">|</span> diastolic <span class="sc">&gt;=</span> <span class="dv">90</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(has_hypertension)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># b: Loan approval</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>credit_score <span class="ot">&lt;-</span> <span class="dv">720</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>annual_income <span class="ot">&lt;-</span> <span class="dv">45000</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>debt_to_income <span class="ot">&lt;-</span> <span class="fl">0.35</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>credit_ok <span class="ot">&lt;-</span> credit_score <span class="sc">&gt;=</span> <span class="dv">650</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>income_ok <span class="ot">&lt;-</span> annual_income <span class="sc">&gt;=</span> <span class="dv">30000</span></span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>dti_ok <span class="ot">&lt;-</span> debt_to_income <span class="sc">&lt;</span> <span class="fl">0.43</span></span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>loan_approved <span class="ot">&lt;-</span> credit_ok <span class="sc">&amp;</span> income_ok <span class="sc">&amp;</span> dti_ok</span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(loan_approved)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c: Discount eligibility</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>loyalty_member <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>cart_total <span class="ot">&lt;-</span> <span class="dv">85</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>birthday_month <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>discount_eligible <span class="ot">&lt;-</span> loyalty_member <span class="sc">|</span> cart_total <span class="sc">&gt;</span> <span class="dv">100</span> <span class="sc">|</span> birthday_month</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(discount_eligible)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d: Product inspection</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span> <span class="fl">10.05</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>diameter <span class="ot">&lt;-</span> <span class="fl">5.12</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>weight_ok <span class="ot">&lt;-</span> weight <span class="sc">&gt;=</span> <span class="fl">9.8</span> <span class="sc">&amp;</span> weight <span class="sc">&lt;=</span> <span class="fl">10.2</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>diameter_ok <span class="ot">&lt;-</span> diameter <span class="sc">&gt;=</span> <span class="fl">4.9</span> <span class="sc">&amp;</span> diameter <span class="sc">&lt;=</span> <span class="fl">5.1</span></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>product_passes <span class="ot">&lt;-</span> weight_ok <span class="sc">&amp;</span> diameter_ok</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(product_passes)  <span class="co"># FALSE (fails on diameter)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># e: Express lane eligibility</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>occupants <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>is_electric <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>has_premium_pass <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>express_eligible <span class="ot">&lt;-</span> occupants <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">|</span> is_electric <span class="sc">|</span> has_premium_pass</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(express_eligible)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Floating-Point Comparisons
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, decimal numbers are stored using binary approximations, which can lead to small precision errors when comparing values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>is_equal <span class="ot">&lt;-</span> <span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span> <span class="sc">==</span> <span class="fl">0.3</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>is_equal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>This may return <code>FALSE</code> because of floating-point representation error, even though mathematically the values are equal.</p>
+<p>To safely compare decimal numbers in R, use <code>all.equal()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>is_equal <span class="ot">&lt;-</span> <span class="fu">all.equal</span>(<span class="fl">0.1</span> <span class="sc">+</span> <span class="fl">0.2</span>, <span class="fl">0.3</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>is_equal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="complex" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Complex</h1>
+<p><strong>🔹 Definition</strong></p>
+<p>A complex number in R represents numbers with both real and imaginary parts, written as <code>a + bi</code> where <code>i</code> is the square root of -1.</p>
+<ul>
+<li>Written as <code>real + imaginary i</code></li>
+<li>Stored internally as pairs of double-precision numbers</li>
+<li>Imaginary unit denoted by i or j suffix</li>
+<li>Examples: 3 + 2i, -4i, 1 + 0i</li>
+<li>Functions: <code>Re()</code>, <code>Im()</code>, <code>Mod()</code>, <code>Arg()</code></li>
+<li>Applications: Signal processing, quantum mechanics, engineering calculations</li>
+</ul>
+<p><strong>🔹 Syntax</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span>i <span class="co"># real part = 3, imaginary part = 4</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "complex"</code></pre>
+</div>
+</div>
+<p><strong>🔹 Key Notes</strong></p>
+<ul>
+<li>Consists of real part and imaginary part</li>
+<li>Supports arithmetic operations (+, -, *, /)</li>
+<li>Can extract real and imaginary components using <code>Re()</code> and <code>Im()</code></li>
+<li>Useful for Fourier transforms, AC circuit analysis, and quantum mechanics</li>
+</ul>
+<p><strong>🔹 Real-World Examples</strong></p>
+<ul>
+<li>AC circuit impedance → <code>50 + 30i ohms</code></li>
+<li>Quantum state amplitude → <code>0.6 + 0.8i</code></li>
+<li>Signal frequency component → <code>-2 + 5i</code></li>
+<li>Complex root of polynomial → <code>-1 + 2i</code></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>You May Skip This Section
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Complex numbers are not commonly encountered in standard statistical work. For this reason, we will keep this section brief and straightforward.</p>
+</div>
+</div>
+</section>
+<section id="raw" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Raw</h1>
+<p><strong>🔹 Definition</strong></p>
+<p>A raw vector in R represents bytes (0-255) of binary data, such as file contents or encrypted information.</p>
+<blockquote class="blockquote">
+<p>Raw data type is rarely used in standard statistical analysis. This section provides only a brief introduction to the basics.</p>
+</blockquote>
+<ul>
+<li>Stored internally as a sequence of bytes (0-255)</li>
+<li>Must be created using <code>as.raw()</code> or <code>charToRaw()</code></li>
+<li>Examples: <code>as.raw(65)</code>, <code>charToRaw("Hello")</code></li>
+<li>Range: <code>00</code> to <code>ff</code> (hexadecimal) or <code>0</code> to <code>255</code> (decimal)</li>
+</ul>
+<p><strong>🔹 Syntax</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>byte <span class="ot">&lt;-</span> <span class="fu">as.raw</span>(<span class="dv">65</span>) <span class="co"># creates raw byte with value 65 (ASCII 'A')</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(byte)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "raw"</code></pre>
+</div>
+</div>
+<p><strong>🔹 Key Notes</strong></p>
+<ul>
+<li>Stores binary data exactly as bytes</li>
+<li>Useful for file I/O, network communication, and cryptography</li>
+<li>Cannot perform arithmetic operations directly</li>
+<li>Rarely needed in typical statistical workflows</li>
+</ul>
+<p><strong>🔹 Real-World Examples</strong></p>
+<ul>
+<li>Reading binary file contents → <code>as.raw(c(0x48, 0x69))</code></li>
+<li>Text to bytes for encryption → <code>charToRaw("Secret")</code></li>
+<li>Image pixel data → <code>readBin("image.jpg", "raw", n = 100)</code></li>
+<li>Network packet payload → raw byte sequences</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>You May Skip This Section
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The raw data type is not commonly encountered in standard statistical work. For this reason, we will keep this section brief and straightforward.</p>
+</div>
+</div>
+</section>
+<section id="functions-for-inspecting-data-types" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Functions for Inspecting Data Types</h1>
+<p>When working with data in R, you’ll often need to verify what type of data you’re dealing with before performing operations. R provides several functions for checking data types, each serving a slightly different purpose. <code>typeof()</code> reveals the internal storage type, <code>class()</code> shows the object-oriented class, and the family of <code>is.type()</code> functions return simple TRUE/FALSE checks.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>typeof(x)</code></td>
+<td style="text-align: left;">Returns the internal storage type of <code>x</code></td>
+<td style="text-align: left;"><code>typeof(42L)</code></td>
+<td style="text-align: left;"><code>"integer"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>class(x)</code></td>
+<td style="text-align: left;">Returns the class attribute of <code>x</code></td>
+<td style="text-align: left;"><code>class(3.14)</code></td>
+<td style="text-align: left;"><code>"numeric"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mode(x)</code></td>
+<td style="text-align: left;">Returns the R storage mode of <code>x</code></td>
+<td style="text-align: left;"><code>mode(TRUE)</code></td>
+<td style="text-align: left;"><code>"logical"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>str(x)</code></td>
+<td style="text-align: left;">Displays the structure of <code>x</code></td>
+<td style="text-align: left;"><code>str("hello")</code></td>
+<td style="text-align: left;"><code>chr "hello"</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>is.logical(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is logical</td>
+<td style="text-align: left;"><code>is.logical(FALSE)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>is.integer(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is integer</td>
+<td style="text-align: left;"><code>is.integer(42)</code></td>
+<td style="text-align: left;"><code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>is.double(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is double</td>
+<td style="text-align: left;"><code>is.double(3.14)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>is.numeric(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is numeric (integer or double)</td>
+<td style="text-align: left;"><code>is.numeric(42L)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>is.character(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is character</td>
+<td style="text-align: left;"><code>is.character("R")</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>is.complex(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is complex</td>
+<td style="text-align: left;"><code>is.complex(3+4i)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>is.raw(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is raw</td>
+<td style="text-align: left;"><code>is.raw(as.raw(65))</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>is.atomic(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is an atomic vector</td>
+<td style="text-align: left;"><code>is.atomic(3.14)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>is.vector(x)</code></td>
+<td style="text-align: left;">Checks if <code>x</code> is a vector</td>
+<td style="text-align: left;"><code>is.vector(42L)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="type-coercion" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Type Coercion</h1>
+<p>Type coercion converts data from one type to another. R performs implicit coercion automatically in some contexts, but explicit coercion gives you control. Understanding coercion prevents silent errors and unexpected results.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>as.logical(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to logical</td>
+<td style="text-align: left;"><code>as.logical(42)</code></td>
+<td style="text-align: left;"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>as.integer(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to integer</td>
+<td style="text-align: left;"><code>as.integer(3.14)</code></td>
+<td style="text-align: left;"><code>3L</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>as.double(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to double</td>
+<td style="text-align: left;"><code>as.double(42L)</code></td>
+<td style="text-align: left;"><code>42</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>as.numeric(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to numeric (alias for <code>as.double</code>)</td>
+<td style="text-align: left;"><code>as.numeric(TRUE)</code></td>
+<td style="text-align: left;"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>as.character(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to character</td>
+<td style="text-align: left;"><code>as.character(3.14)</code></td>
+<td style="text-align: left;"><code>"3.14"</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>as.complex(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to complex</td>
+<td style="text-align: left;"><code>as.complex(3)</code></td>
+<td style="text-align: left;"><code>3+0i</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>as.raw(x)</code></td>
+<td style="text-align: left;">Converts <code>x</code> to raw</td>
+<td style="text-align: left;"><code>as.raw(65)</code></td>
+<td style="text-align: left;"><code>41</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Coming Up Next: Data Structures
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You now have a solid understanding of R’s atomic data types. However, in real-world data analysis, values are rarely used in isolation. In the next section, we will explore data structures in R. These include: vectors, characters, factors, lists, matrices, arrays, data frames, time series—which show how these basic types are combined and organized for analysis.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

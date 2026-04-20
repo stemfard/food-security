@@ -1,0 +1,555 @@
+[
+  {
+    "objectID": "Data Types.html",
+    "href": "Data Types.html",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "R has six atomic data types (also called “atomic vectors” when multiple values are combined). Think of these as the alphabet of the R language — every complex object you’ll ever create is built from these fundamental building blocks. Even sophisticated structures like dates, factors, matrices, and data frames are simply classes constructed on top of these six core data types. We’ll explore each one in Sections 1.1 through 1.6 below.\n\n\n\n\n\n\nTipLearning Objectives\n\n\n\n✅ Understand the various data types in R.\n✅ Use appropriate R functions to create each of the data types.\n✅ Use the typeof and class functions to check the data type.\n✅ Understand missing data and other special values in R.\n✅ Convert between data types.\n\n\n\n\n🔹 Definition\nA double (or numeric) represents real numbers (with decimals). This is the default numeric type in R.\n\nDefault numeric type in R\n64-bit double precision (approximately 15-16 significant digits)\nExamples: 3.14, -42.5, 2.9979e8 (scientific notation)\n\n🔹 Syntax\n\nx &lt;- 18.342 # has decimals\ntypeof(x)\n\n[1] \"double\"\n\n\n🔹 Key Characteristics\n\nCan store decimals\nHigher precision than integers\nUsed in most mathematical computations\n\n🔹 Real-World Examples\n\nTemperature in degrees → 36.8\nBank balance → 10431.75\nHeight in meters → 1.58\nThe constant pi → 3.141593\n\n🔹 Practical Examples\nCalculate the total price including 16% value added tax (VAT):\n\nprice &lt;- 19.99\ntax_rate &lt;- 0.16\ntotal &lt;- price * (1 + tax_rate)\nprint(total)\n\n[1] 23.1884\n\n\nCalculate the body mass index (BMI) given weight in kg and height in metres:\n\nweight &lt;- 68.5 # kilograms\nheight &lt;- 1.74 # metres\nbmi &lt;- weight / height^2\nprint(bmi)\n\n[1] 22.62518\n\n\nCalculate the percentage change between pre-test and post-test scores:\n\npre_test &lt;- 63.7\npost_test &lt;- 82.4\npercent_change &lt;- ((post_test - pre_test) / pre_test) * 100\nprint(percent_change)\n\n[1] 29.35636\n\n\nCalculate the p-value from a z-score (two-tailed test):\n\nz_score &lt;- 1.96\np_value &lt;- 2 * (1 - pnorm(z_score))\nprint(p_value)\n\n[1] 0.04999579\n\n\nCalculate the mean and standard deviation\n\ndata &lt;- c(43,65, 54, 76, 39, 48, 52)\n\nMean\n\navg &lt;- mean(data)\nprint(avg)\n\n[1] 53.85714\n\n\nStandard deviation\n\nstd &lt;- sd(data)\nprint(std)\n\n[1] 12.85079\n\n\n\n\n\nAn integer in R represents whole numbers (no decimals), such as counts or discrete values.\n\nStored internally as 32-bit signed values\nMust be explicitly declared using L suffix\nExamples: 42L, -7L, 0L\nRange: -2147483647 to 2147483647\n\n\n\n\nCharacter type stores text strings.\n\nStrings are enclosed in quotes (single ' or double \")\nUse nchar() to count characters\nUse paste() to concatenate strings\nExamples: \"Hello\", 'Data Science', \"123\"\n\n\n\n\nLogical (Boolean) type represents TRUE and FALSE values.\n\nUsed for conditional operations and filtering\nCan be abbreviated as T and F (not recommended)\nLogical operations: & (AND), | (OR), ! (NOT)\nExamples: TRUE, FALSE, 5 &gt; 3 (returns TRUE)\n\n\n\n\nComplex numbers have both real and imaginary parts.\n\nWritten as real + imaginary i\nFunctions: Re(), Im(), Mod(), Arg()\nExample: 2 + 3i\nApplications: Signal processing, quantum mechanics, engineering calculations\n\n\n\n\nRaw type stores bytes (0-255 values).\n\nUsed for binary data, file I/O, cryptography\nCreated with as.raw() or charToRaw()\nExamples: as.raw(65) (returns 41 hex, which is ASCII ‘A’)\nConvert with rawToChar() for text representation"
+  },
+  {
+    "objectID": "Data Types.html#double",
+    "href": "Data Types.html#double",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nA double (or numeric) represents real numbers (with decimals). This is the default numeric type in R.\n\nDefault numeric type in R\n64-bit double precision (approximately 15-16 significant digits)\nExamples: 3.14, -42.5, 2.9979e8 (scientific notation)\n\n🔹 Syntax\n\nx &lt;- 18.342 # has decimals\ntypeof(x)\n\n[1] \"double\"\n\n\n🔹 Key Characteristics\n\nCan store decimals\nHigher precision than integers\nUsed in most mathematical computations\n\n🔹 Real-World Examples\n\nTemperature in degrees → 36.8\nBank balance → 10431.75\nHeight in meters → 1.58\nThe constant pi → 3.141593\n\n🔹 Practical Examples\nCalculate the total price including 16% value added tax (VAT):\n\nprice &lt;- 19.99\ntax_rate &lt;- 0.16\ntotal &lt;- price * (1 + tax_rate)\nprint(total)\n\n[1] 23.1884\n\n\nCalculate the body mass index (BMI) given weight in kg and height in metres:\n\nweight &lt;- 68.5 # kilograms\nheight &lt;- 1.74 # metres\nbmi &lt;- weight / height^2\nprint(bmi)\n\n[1] 22.62518\n\n\nCalculate the percentage change between pre-test and post-test scores:\n\npre_test &lt;- 63.7\npost_test &lt;- 82.4\npercent_change &lt;- ((post_test - pre_test) / pre_test) * 100\nprint(percent_change)\n\n[1] 29.35636\n\n\nCalculate the p-value from a z-score (two-tailed test):\n\nz_score &lt;- 1.96\np_value &lt;- 2 * (1 - pnorm(z_score))\nprint(p_value)\n\n[1] 0.04999579\n\n\nCalculate the mean and standard deviation\n\ndata &lt;- c(43,65, 54, 76, 39, 48, 52)\n\nMean\n\navg &lt;- mean(data)\nprint(avg)\n\n[1] 53.85714\n\n\nStandard deviation\n\nstd &lt;- sd(data)\nprint(std)\n\n[1] 12.85079"
+  },
+  {
+    "objectID": "Data Types.html#integer",
+    "href": "Data Types.html#integer",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "An integer in R represents whole numbers (no decimals), such as counts or discrete values.\n\nStored internally as 32-bit signed values\nMust be explicitly declared using L suffix\nExamples: 42L, -7L, 0L\nRange: -2147483647 to 2147483647"
+  },
+  {
+    "objectID": "Data Types.html#character",
+    "href": "Data Types.html#character",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "Character type stores text strings.\n\nStrings are enclosed in quotes (single ' or double \")\nUse nchar() to count characters\nUse paste() to concatenate strings\nExamples: \"Hello\", 'Data Science', \"123\""
+  },
+  {
+    "objectID": "Data Types.html#logical",
+    "href": "Data Types.html#logical",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "Logical (Boolean) type represents TRUE and FALSE values.\n\nUsed for conditional operations and filtering\nCan be abbreviated as T and F (not recommended)\nLogical operations: & (AND), | (OR), ! (NOT)\nExamples: TRUE, FALSE, 5 &gt; 3 (returns TRUE)"
+  },
+  {
+    "objectID": "Data Types.html#complex",
+    "href": "Data Types.html#complex",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "Complex numbers have both real and imaginary parts.\n\nWritten as real + imaginary i\nFunctions: Re(), Im(), Mod(), Arg()\nExample: 2 + 3i\nApplications: Signal processing, quantum mechanics, engineering calculations"
+  },
+  {
+    "objectID": "Data Types.html#raw",
+    "href": "Data Types.html#raw",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "Raw type stores bytes (0-255 values).\n\nUsed for binary data, file I/O, cryptography\nCreated with as.raw() or charToRaw()\nExamples: as.raw(65) (returns 41 hex, which is ASCII ‘A’)\nConvert with rawToChar() for text representation"
+  },
+  {
+    "objectID": "data-types/data-types.html",
+    "href": "data-types/data-types.html",
+    "title": "R Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "R has six atomic data types (also called “atomic vectors” when multiple values are combined). Think of these as the alphabet of the R language — every complex object you’ll ever create is built from these fundamental building blocks. Even sophisticated structures like dates, factors, matrices, and data frames are simply classes constructed on top of these six core data types. We’ll explore each one in Sections 1.1 through 1.6 below.\n\n\n\n\n\n\nTipLearning Objectives\n\n\n\n✅ Understand the various data types in R.\n✅ Use appropriate R functions to create each of the data types.\n✅ Use the typeof and class functions to check the data type.\n✅ Understand missing data and other special values in R.\n✅ Convert between data types."
+  },
+  {
+    "objectID": "data-types/data-types.html#double",
+    "href": "data-types/data-types.html#double",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nA double (or numeric) represents real numbers, including those with decimal values. This is the default numeric type in R.\n\nDefault numeric type in R\n64-bit double precision (approximately 15-16 significant digits)\nExamples: 3.14, -42.5, 2.9979e8 (scientific notation)\n\n🔹 Syntax\n\nx &lt;- 18.342 # has decimals\ntypeof(x)\n\n[1] \"double\"\n\n\n🔹 Key Notes\n\nCan store decimals\nHigher precision than integers\nUsed in most mathematical computations\n\n🔹 Real-World Examples\n\nTemperature in degrees → 36.8\nBank balance → 10431.75\nHeight in meters → 1.58\nThe constant pi → 3.141593\n\n🔹 Code Examples\nCalculate the total price including 16% value added tax (VAT):\n\nprice &lt;- 19.99\ntax_rate &lt;- 0.16\ntotal &lt;- price * (1 + tax_rate)\nprint(total)\n\n[1] 23.1884\n\n\nCalculate the body mass index (BMI) given weight in kg and height in metres:\n\nweight &lt;- 68.5 # kilograms\nheight &lt;- 1.74 # metres\nbmi &lt;- weight / height^2\nprint(bmi)\n\n[1] 22.62518\n\n\nCalculate the p-value from a z-score (two-tailed test):\n\nz_score &lt;- 1.96\np_value &lt;- 2 * (1 - pnorm(z_score))\nprint(p_value)\n\n[1] 0.04999579\n\n\n\n\n\n\n\n\nNotePractice Problems\n\n\n\n\nCalculate the percentage change between a pre-test score of 63.7 and a post-test score of 82.4.\nCalculate the mean and standard deviation for the following dataset: 43, 65, 54, 76, 39, 48, 52.\nA product costs KES 1,250.75 and is discounted by 12.5%. What is the final price?\nAn athlete completes a race in 2.35 hours. Convert this time into minutes.\nA tank contains 45.8 liters of water. If 12.6 liters are used, how much remains?\nA newborn baby weighs 2849 grams. What is the weight in kilograms?\n\n\n\n\n\n\n\n\n\nTipAnswers\n\n\n\n\n\n\n# a - Percentage change\npre_test &lt;- 63.7\npost_test &lt;- 82.4\npercent_change &lt;- ((post_test - pre_test) / pre_test) * 100\nprint(percent_change)\n\n[1] 29.35636\n\n\n\n# b - Mean and standard deviation (SD)\ndata &lt;- c(43, 65, 54, 76, 39, 48, 52)\navg &lt;- mean(data)\nstd &lt;- sd(data)\n\nprint(paste0(\"Mean = \", avg))\n\n[1] \"Mean = 53.8571428571429\"\n\nprint(paste0(\"SD = \", std))\n\n[1] \"SD = 12.8507920823137\"\n\n\n\n# c - Discounted price\noriginal_price &lt;- 1250.75\ndiscount_percent &lt;- 12.5\ndiscount_amount &lt;- original_price * (discount_percent / 100)\nfinal_price &lt;- original_price - discount_amount\nprint(final_price)\n\n[1] 1094.406\n\n\n\n# d - Hours to minutes\nhours &lt;- 2.35\nminutes &lt;- hours * 60\nprint(minutes)\n\n[1] 141\n\n\n\n# e - Remaining water\ninitial_water &lt;- 45.8\nused_water &lt;- 12.6\nremaining_water &lt;- initial_water - used_water\nprint(remaining_water)\n\n[1] 33.2\n\n\n\n# f - Grams to kilograms\nweight_grams &lt;- 2849\nweight_kg &lt;- weight_grams / 1000\nprint(weight_kg)\n\n[1] 2.849"
+  },
+  {
+    "objectID": "data-types/data-types.html#integer",
+    "href": "data-types/data-types.html#integer",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nAn integer in R represents whole numbers (no decimals), such as counts or discrete values.\n\nStored internally as 32-bit signed values\nMust be explicitly declared using L suffix\nExamples: 42L, -7L, 0L\nRange: -2147483647 to 2147483647\n\n🔹 Syntax\n\nhh_size &lt;- 8L # note the suffix L\ntypeof(hh_size)\n\n[1] \"integer\"\n\n\n🔹 Key Notes\n\nNo fractional component\nEfficient for memory when working with large datasets\nDefault numeric values in R are NOT integers unless specified\n\n🔹 Real-World Examples\n\nNumber of students in a class → 45L\nNumber of products sold → 1200L\nNumber of meals taken in a day → 3L\nNumber of mosquito nets distributed → 5\n\n🔹 Code Examples\nCalculate total calories\n\ncalories_breakfast &lt;- 450L\ncalories_lunch &lt;- 680L\n\n# Calculate total calories\ntotal_calories &lt;- calories_breakfast + calories_lunch\nprint(total_calories)\n\n[1] 1130\n\n\nCalculate portfolio\n\ntesla_shares &lt;- 50L\napple_shares &lt;- 100L\n\n# Calculate portfolio\ntotal_shares &lt;- tesla_shares + apple_shares\nprint(total_shares)\n\n[1] 150\n\n\nInventory management and sales tracking\n\nunits_in_stock &lt;- 543L\nunits_sold_today &lt;- 127L\n\n# Remaining inventory\nremaining_stock &lt;- units_in_stock - units_sold_today\nprint(remaining_stock)\n\n[1] 416\n\n\nCalculate amount\n\nquantity &lt;- 138L\nunit_price &lt;- 453L\n\n# Calculate amount\namount &lt;- quantity * unit_price\nprint(amount)\n\n[1] 62514"
+  },
+  {
+    "objectID": "data-types/data-types.html#character",
+    "href": "data-types/data-types.html#character",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nThe character data type in R is used to store textual data (strings), such as names, labels, codes, or any sequence of letters, numbers, and symbols enclosed in quotes.\n🔹 Syntax\n\nname &lt;- \"STEM Research\"\ntypeof(name)\n\n[1] \"character\"\n\n\n🔹 Key Notes\n\nMust be enclosed in single (' ') or double (\" \") quotes\nNumbers stored as characters are not numeric (e.g., \"123\" ≠ 123)\nCommonly used for categorical labels, identifiers, and descriptive data\n\n🔹 Real-World Examples\n\nTemperature in degrees → 36.8\nBank balance → 10431.75\nHeight in meters → 1.58\nThe constant pi → 3.141593\n\n🔹 Code Examples\nCalculate the total price including 16% value added tax (VAT):\n\ncountry &lt;- \"Kenya\"\ncode &lt;- \"A123\"\nnumber_as_text &lt;- \"100\"\n\n🔹 Practice\n\nCreate a variable storing your institution name\nCheck its data type\nTry adding \"100\" + 50 and observe what happens\n\n\n\n\n\n\n\nTipAnswers\n\n\n\n\n\n\n# a\ninstitution &lt;- \"University of Nairobi\"\nprint(institution)\n\n[1] \"University of Nairobi\"\n\n\n\n# b\ntypeof(institution)\n\n[1] \"character\"\n\n\n\n# c\n\"100\" + 50\n\nError in `\"100\" + 50`:\n! non-numeric argument to binary operator"
+  },
+  {
+    "objectID": "data-types/data-types.html#logical",
+    "href": "data-types/data-types.html#logical",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nA logical (or boolean) represents binary truth values: either TRUE or FALSE. Logical values are fundamental for conditional operations, filtering data, and control flow in R.\n\nTwo possible values: TRUE (1) and FALSE (0)\nCan be abbreviated as T and F (not recommended for production code)\nResult of comparison and logical operators\nExamples: TRUE, FALSE, T, F\n\n🔹 Syntax\n\nis_adult &lt;- TRUE\ntypeof(is_adult)\n\n[1] \"logical\"\n\n\nIn R, decimal numbers are stored using binary approximations, which can lead to small precision errors when comparing values.\n\nis_equal &lt;- 0.1 + 0.2 == 0.3\nis_equal\n\n[1] FALSE\n\n\nThis may return FALSE because of floating-point representation error, even though mathematically the values are equal.\nTo safely compare decimal numbers in R, use all.equal():\n\nis_equal &lt;- all.equal(0.1 + 0.2, 0.3)\nis_equal\n\n[1] TRUE\n\n\n🔹 Key Notes\n\nUsed in conditional statements (if, else, while)\nAutomatically coerces to integer in arithmetic: TRUE → 1, FALSE → 0\nResults from comparison operators: &gt;, &lt;, ==, !=, &gt;=, &lt;=\nCan be combined with logical operators: & (AND), | (OR), ! (NOT)\n\n🔹 Real-World Examples\n\nIs the patient diabetic? → TRUE\nHas the loan been approved? → FALSE\nIs the temperature above 37°C? → TRUE\nDid the student pass the exam? → TRUE\nIs the baby underweight? → FALSE\n\n🔹 Code Examples\nCheck if a customer qualifies for a senior discount (age ≥ 65):\n\nage &lt;- 72\nsenior_discount &lt;- age &gt;= 65\nprint(senior_discount)\n\n[1] TRUE\n\n\nDetermine if a patient has a fever (temperature &gt; 38.0°C):\n\ntemperature &lt;- 38.5\nhas_fever &lt;- temperature &gt; 38.0\nprint(has_fever)\n\n[1] TRUE\n\n\nCheck if a loan applicant meets multiple criteria (good credit AND stable income):\n\ncredit_score &lt;- 620\nstable_income &lt;- TRUE\nhas_good_credit &lt;- credit_score &gt;= 700\nloan_approved &lt;- has_good_credit & stable_income\nprint(loan_approved)\n\n[1] FALSE\n\n\nDetermine if a number is within a healthy BMI range (18.5 - 24.99):\n\nbmi &lt;- 28.3\nhealthy_bmi &lt;- bmi &gt;= 18.5 & bmi &lt;= 24.9\nprint(healthy_bmi)\n\n[1] FALSE\n\n\nCheck if a transaction is suspicious (amount &gt; 10000 OR foreign_country = TRUE):\n\ntransaction_amount &lt;- 15000\nis_foreign &lt;- FALSE\nsuspicious &lt;- transaction_amount &gt; 10000 | is_foreign\nprint(suspicious)\n\n[1] TRUE"
+  },
+  {
+    "objectID": "data-types/data-types.html#complex",
+    "href": "data-types/data-types.html#complex",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nA complex number in R represents numbers with both real and imaginary parts, written as a + bi where i is the square root of -1.\n\nWritten as real + imaginary i\nStored internally as pairs of double-precision numbers\nImaginary unit denoted by i or j suffix\nExamples: 3 + 2i, -4i, 1 + 0i\nFunctions: Re(), Im(), Mod(), Arg()\nApplications: Signal processing, quantum mechanics, engineering calculations\n\n🔹 Syntax\n\nz &lt;- 3 + 4i # real part = 3, imaginary part = 4\ntypeof(z)\n\n[1] \"complex\"\n\n\n🔹 Key Notes\n\nConsists of real part and imaginary part\nSupports arithmetic operations (+, -, *, /)\nCan extract real and imaginary components using Re() and Im()\nUseful for Fourier transforms, AC circuit analysis, and quantum mechanics\n\n🔹 Real-World Examples\n\nAC circuit impedance → 50 + 30i ohms\nQuantum state amplitude → 0.6 + 0.8i\nSignal frequency component → -2 + 5i\nComplex root of polynomial → -1 + 2i\n\nNote: Complex numbers are not commonly encountered in standard statistical work. For this reason, we will keep this section brief and straightforward."
+  },
+  {
+    "objectID": "data-types/data-types.html#raw",
+    "href": "data-types/data-types.html#raw",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "🔹 Definition\nA raw vector in R represents bytes (0-255) of binary data, such as file contents or encrypted information.\n\nRaw data type is rarely used in standard statistical analysis. This section provides only a brief introduction to the basics.\n\n\nStored internally as a sequence of bytes (0-255)\nMust be created using as.raw() or charToRaw()\nExamples: as.raw(65), charToRaw(\"Hello\")\nRange: 00 to ff (hexadecimal) or 0 to 255 (decimal)\n\n🔹 Syntax\n\nbyte &lt;- as.raw(65) # creates raw byte with value 65 (ASCII 'A')\ntypeof(byte)\n\n[1] \"raw\"\n\n\n🔹 Key Notes\n\nStores binary data exactly as bytes\nUseful for file I/O, network communication, and cryptography\nCannot perform arithmetic operations directly\nRarely needed in typical statistical workflows\n\n🔹 Real-World Examples\n\nReading binary file contents → as.raw(c(0x48, 0x69))\nText to bytes for encryption → charToRaw(\"Secret\")\nImage pixel data → readBin(\"image.jpg\", \"raw\", n = 100)\nNetwork packet payload → raw byte sequences\n\n\nThe raw data type is not commonly encountered in standard statistical work. For this reason, we will keep this section brief and straightforward."
+  },
+  {
+    "objectID": "data-types/data-types.html#type-coercion",
+    "href": "data-types/data-types.html#type-coercion",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "Type coercion converts data from one type to another. R performs implicit coercion automatically in some contexts, but explicit coercion gives you control. Understanding coercion prevents silent errors and unexpected results.\n\n\n\n\n\n\n\n\n\nFunction\nDescription\nExample\nResult\n\n\n\n\nas.logical(x)\nConverts x to logical\nas.logical(42)\nTRUE\n\n\nas.integer(x)\nConverts x to integer\nas.integer(3.14)\n3L\n\n\nas.double(x)\nConverts x to double\nas.double(42L)\n42\n\n\nas.numeric(x)\nConverts x to numeric (alias for as.double)\nas.numeric(TRUE)\n1\n\n\nas.character(x)\nConverts x to character\nas.character(3.14)\n\"3.14\"\n\n\nas.complex(x)\nConverts x to complex\nas.complex(3)\n3+0i\n\n\nas.raw(x)\nConverts x to raw\nas.raw(65)\n41"
+  },
+  {
+    "objectID": "data-types/data-types.html#checking-data-types",
+    "href": "data-types/data-types.html#checking-data-types",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "When working with data in R, you’ll often need to verify what type of data you’re dealing with before performing operations. R provides several functions for checking data types, each serving a slightly different purpose. typeof() reveals the internal storage type, class() shows the object-oriented class, and the family of is.type() functions return simple TRUE/FALSE checks.\n\n\n\n\n\n\n\n\n\nFunction\nDescription\nExample\nResult\n\n\n\n\ntypeof(x)\nReturns the internal storage type of x\ntypeof(42L)\n\"integer\"\n\n\nclass(x)\nReturns the class attribute of x\nclass(3.14)\n\"numeric\"\n\n\nmode(x)\nReturns the R storage mode of x\nmode(TRUE)\n\"logical\"\n\n\nstr(x)\nDisplays the structure of x\nstr(\"hello\")\nchr \"hello\"\n\n\nis.logical(x)\nChecks if x is logical\nis.logical(FALSE)\nTRUE\n\n\nis.integer(x)\nChecks if x is integer\nis.integer(42)\nFALSE\n\n\nis.double(x)\nChecks if x is double\nis.double(3.14)\nTRUE\n\n\nis.numeric(x)\nChecks if x is numeric (integer or double)\nis.numeric(42L)\nTRUE\n\n\nis.character(x)\nChecks if x is character\nis.character(\"R\")\nTRUE\n\n\nis.complex(x)\nChecks if x is complex\nis.complex(3+4i)\nTRUE\n\n\nis.raw(x)\nChecks if x is raw\nis.raw(as.raw(65))\nTRUE\n\n\nis.atomic(x)\nChecks if x is an atomic vector\nis.atomic(3.14)\nTRUE\n\n\nis.vector(x)\nChecks if x is a vector\nis.vector(42L)\nTRUE"
+  },
+  {
+    "objectID": "data-types/data-types.html#transition-to-next-session",
+    "href": "data-types/data-types.html#transition-to-next-session",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "Now that you can ask complex yes/no questions in R, the next session will show you how to take action based on those answers using if, if-else, and if-else if-else statements."
+  },
+  {
+    "objectID": "data-types/data-types.html#next-section",
+    "href": "data-types/data-types.html#next-section",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "You now have a solid understanding of R’s atomic data types. However, in real-world data analysis, values are rarely used in isolation. In the next section, we will explore data structures in R. These include: vectors, characters, factors, lists, matrices, arrays, data frames, time series—which show how these basic types are combined and organized for analysis."
+  },
+  {
+    "objectID": "data-types/data-types.html#functions-for-inspecting-data-types",
+    "href": "data-types/data-types.html#functions-for-inspecting-data-types",
+    "title": "Data Types: The Foundation of Programming",
+    "section": "",
+    "text": "When working with data in R, you’ll often need to verify what type of data you’re dealing with before performing operations. R provides several functions for checking data types, each serving a slightly different purpose. typeof() reveals the internal storage type, class() shows the object-oriented class, and the family of is.type() functions return simple TRUE/FALSE checks.\n\n\n\n\n\n\n\n\n\nFunction\nDescription\nExample\nResult\n\n\n\n\ntypeof(x)\nReturns the internal storage type of x\ntypeof(42L)\n\"integer\"\n\n\nclass(x)\nReturns the class attribute of x\nclass(3.14)\n\"numeric\"\n\n\nmode(x)\nReturns the R storage mode of x\nmode(TRUE)\n\"logical\"\n\n\nstr(x)\nDisplays the structure of x\nstr(\"hello\")\nchr \"hello\"\n\n\nis.logical(x)\nChecks if x is logical\nis.logical(FALSE)\nTRUE\n\n\nis.integer(x)\nChecks if x is integer\nis.integer(42)\nFALSE\n\n\nis.double(x)\nChecks if x is double\nis.double(3.14)\nTRUE\n\n\nis.numeric(x)\nChecks if x is numeric (integer or double)\nis.numeric(42L)\nTRUE\n\n\nis.character(x)\nChecks if x is character\nis.character(\"R\")\nTRUE\n\n\nis.complex(x)\nChecks if x is complex\nis.complex(3+4i)\nTRUE\n\n\nis.raw(x)\nChecks if x is raw\nis.raw(as.raw(65))\nTRUE\n\n\nis.atomic(x)\nChecks if x is an atomic vector\nis.atomic(3.14)\nTRUE\n\n\nis.vector(x)\nChecks if x is a vector\nis.vector(42L)\nTRUE"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html",
+    "href": "introduction/introduction-to-r.html",
+    "title": "Conditional Logic: Making Decisions with Data",
+    "section": "",
+    "text": "1 Introduction\nWelcome to the foundation of R programming. Before you can perform data analysis, build visualizations, or create models, you must understand how R stores and manipulates information. This session focuses on two fundamental concepts: objects (where R stores data) and variables (the names you give to those objects).\nMastering these basics will make every subsequent step—from data wrangling to statistical modeling—more clear and efficient.\n\n\n\n\n\n\nTipLearning Objectives\n\n\n\n✅ Understand what objects and variables are in R\n✅ Learn the different assignment operators and when to use each\n✅ Apply proper naming conventions and avoid common errors\n\n\n\n\n2 Why R?\nR has emerged as a common language for data science and statistical computing. But what makes it the preferred choice for professionals across industries (especially for statistical analysis) over other programming languages?\n🔹 Advantages\n\n\n\n\n\n\n\nAdvantage\nDescription\n\n\n\n\nFree and Open Source\nNo licensing costs, community-driven development\n\n\nComprehensive Statistical Tools\nBuilt-in functions for virtually any statistical analysis\n\n\nExcellent Visualization\nPackages like ggplot2 create publication-quality graphics\n\n\nLarge Ecosystem\nOver 19,000 packages on CRAN (Comprehensive R Archive Network)\n\n\nReproducible Research\nR Markdown and Quarto enable integrated analysis and reporting\n\n\nActive Community\nExtensive documentation, forums, and user groups\n\n\n\n.\n🔹 Disadvantages\n\n\n\nDisadvantage\nDescription\n\n\n\n\nSteep Learning Curve\nSyntax can be unusual for beginners\n\n\nMemory Intensive\nLoads data into RAM, limiting dataset size\n\n\nSlow with Loops\nVectorized operations preferred over loops\n\n\nLess Standardized\nMany ways to accomplish the same task\n\n\nNo Built-in GUI\nPrimarily command-line based\n\n\n\n.\n🔹 Applications of R\n\n\n\n\n\n\n\nIndustry\nApplications\n\n\n\n\nFinance\nRisk management, portfolio optimization, time series analysis\n\n\nHealthcare\nClinical trials, epidemiology, bioinformatics\n\n\nMarketing\nCustomer segmentation, A/B testing, sales forecasting\n\n\nManufacturing\nQuality control, predictive maintenance\n\n\nGovernment\nCensus data analysis, policy evaluation\n\n\nAcademia\nResearch, statistical education, reproducible research\n\n\nSports Analytics\nPlayer performance, game strategy\n\n\n\n\n\n3 What are Objects and Variables?\nIn R, everything is an object – numbers, text, functions, plots, even the output of statistical models. An object is simply a collection of data stored in memory.\nA variable is a name you create that points to an object. Think of variables as labels or handles that let you access and work with data.\n\n# Variable stores a value\nx &lt;- 10        # x is a variable holding the numeric object 10\nname &lt;- \"James\" # name is a variable holding the character object \"James\"\n\n🔹 The Assignment Operator\nR offers several ways to assign values to variables. The most common and idiomatic is &lt;-.\n\n\n\n\n\n\n\n\nOperator\nExample\nWhen to use\n\n\n\n\n&lt;-\nx &lt;- 5\nPreferred – The standard R assignment operator\n\n\n=\nx = 5\nAllowed but less common; typically used inside function arguments\n\n\n&lt;&lt;-\nx &lt;&lt;- 5\nSpecial case – assigns in parent environments (rarely needed)\n\n\n-&gt;\n5 -&gt; x\nRightward assignment – valid but unconventional\n\n\n\nBest practice:Always use &lt;- for assignment. It signals “I am creating a variable” versus = which R also uses for specifying arguments to functions.\n\n# Good practice\ntotal_revenue &lt;- 150000\n\n# Avoid (though it works)\ntotal_revenue = 150000\n\n# Avoid – confusing to read\n150000 -&gt; total_revenue\n\nYou can also assign multiple variables in one line:\n\n# Multiple assignments\na &lt;- b &lt;- c &lt;- 10   # a, b, and c all get the value 10\n\n# Or assign from a function\nsqrt_x &lt;- sqrt(16)  # sqrt_x becomes 4\n\n\n\n4 Naming Variables\n🔹 Rules (Must follow – R will error if you break these)\nThe rules below must be strictly adhered to. Any violation will result in a syntax error.\n\nStart with a letter or a dot (not followed by a number) – name, .hidden, but not 1var or _var\nUse only letters, numbers, dot (.), and underscore (_) – No spaces and special characters @, $, %, etc.\nNo reserved words – if, else, function, TRUE, NULL, NA, for, while, break, next, repeat\n\n\n# Valid names\nage_years &lt;- 1\nage.years &lt;- 2\nageYears &lt;- 3\n.age_hidden &lt;- 4   # dot at start creates a hidden variable\n\n# Invalid names – these will throw errors\n# 1var &lt;- 10       # starts with number\n# my-var &lt;- 20     # hyphen not allowed (minus operator)\n# my var &lt;- 30     # space not allowed\n# if &lt;- 40         # reserved word\n\n🔹 Conventions\nThese are not enforced by R, but following them makes your code easier for others (and future you) to read.\n\n\n\n\n\n\n\n\nConvention\nExample\nNotes\n\n\n\n\nsnake_case\ntotal_revenue\nMost common in R; underscores separate words\n\n\ncamelCase\ntotalRevenue\nCommon in other languages; acceptable in R\n\n\nperiod.separated\ntotal.revenue\nValid but can be confused with S3 method notation\n\n\nUppercase for constants\nMAX_VALUE\nSignals a value that shouldn’t change\n\n\n\n.\nPractical tips:\n\nUse descriptive, meaningful names – age_in_years not a or x\nBe consistent within a project – don’t mix total_revenue and total.expenses and totalSpend\nAvoid overly long names – customer_monthly_average_purchase_amount is precise but tedious\nPrefix grouped variables – cust_id, cust_name, cust_age\n\n\n# Good naming examples\ncustomer_age &lt;- 34\nis_active &lt;- TRUE\norder_total_usd &lt;- 299.99\n\n# Poor naming examples\nx &lt;- 34                # meaningless\ncustomer_age_in_years_as_of_today &lt;- 34  # too long\na &lt;- TRUE              # cryptic\n\n\n\n5 Getting Help in R\nR has excellent built-in documentation. Learning to access it efficiently will save you hours of searching online.\nWithin RStudio / R console:\n\n\n\n\n\n\n\nCommand\nWhat it does\n\n\n\n\n?function_name\nOpens help page for a function (e.g., ?mean)\n\n\n??keyword\nSearches for keyword across all help pages\n\n\nexample(function_name)\nRuns the examples shown in the help page\n\n\nargs(function_name)\nShows just the arguments a function takes\n\n\nvignette(\"package_name\")\nOpens a longer tutorial for a package\n\n\nbrowseVignettes()\nLists all available vignettes\n\n\n\n.\nCommon help scenarios:\n\n\n\n\n\n\n\n\nTask\nCommand\nNotes\n\n\n\n\nForgotten how mean() works\n?mean\nOpens help page in viewer pane\n\n\nFind functions related to correlation\n??correlation\nSearches across all installed packages\n\n\nSee an example of logistic regression\nexample(glm)\nRuns built-in examples for glm()\n\n\nCheck arguments for plot()\nargs(plot)\nShows parameter names and defaults\n\n\nLong-form guide to dplyr\nvignette(\"dplyr\")\nRequires dplyr to be installed\n\n\n\n\n\n6 Packages\nBase R is powerful, but packages extend it enormously. A package is a collection of functions, data, and documentation bundled together.\nWhy use packages?\n\nAdd new statistical methods (e.g., lme4 for mixed models)\nProvide consistent data manipulation tools (e.g., dplyr)\nCreate beautiful graphics (e.g., ggplot2)\nConnect to external systems (e.g., DBI for databases)\n\nThe package workflow:\n\n\n\n\n\n\n\n\nTask\nCode\nNotes\n\n\n\n\nInstall a single package\ninstall.packages(\"dplyr\")\nDo once per computer; needs internet connection\n\n\nInstall multiple packages\ninstall.packages(c(\"ggplot2\", \"tidyr\", \"readr\"))\nUse c() to combine package names\n\n\nInstall from GitHub\nremotes::install_github(\"tidyverse/dplyr\")\nRequires the remotes package first\n\n\nLoad a package\nlibrary(dplyr)\nDo once per R session\n\n\nCheck if package is installed\nrequire(dplyr)\nReturns FALSE if not installed (instead of error)\n\n\nSee loaded packages\nsearch()\nShows all packages currently attached\n\n\nUpdate all packages\nupdate.packages()\nCan take a while; answer prompts carefully\n\n\nSee installed packages\ninstalled.packages()\nReturns a large matrix of package metadata\n\n\n\n\n\n\n\n\n\nWarningWarning\n\n\n\nThe code above is for reference only. Do not run install.packages(), update.packages(), or installed.packages() unless you intentionally want to modify your R environment. Loading packages with library() and viewing loaded packages with search() are safe to run.\n\n\nKey package collections to know:\n\n\n\n\n\n\n\nCollection\nPurpose\n\n\n\n\ntidyverse\nData science – dplyr, ggplot2, tidyr, readr, purrr, stringr\n\n\ndata.table\nFast large-data manipulation\n\n\nshiny\nInteractive web applications\n\n\nplotly\nInteractive graphics\n\n\nrmarkdown / quarto\nReproducible reports\n\n\n\nLoading order matters: If you load a package that masks (overrides) a base R function, the package version takes precedence. R will warn you:\n\n# Example warning (for illustration only)\nlibrary(dplyr)\n\nWarning: package 'dplyr' was built under R version 4.5.3\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nThis means that filter() and lag() are now taken from the dplyr package rather than base R. To explicitly use the base R version, you can call stats::filter().\nSimilarly, the base R functions intersect(), setdiff(), setequal(), and union() have been masked (overwritten) by functions from dplyr.\n\n\n\n\n\n\nCautionCaution\n\n\n\nNever use install.packages() inside a script that others will run. It will reinstall every time. Put installation instructions in a separate setup script or README.\n\n\n\n\n\n\n\n\nImportantComing Up Next: Data Types\n\n\n\nYou now have a solid foundation in R objects and variables—knowing how to assign, name, and manage them effectively. The next section focuses on the fundamental building blocks: R’s atomic data types. These are the simplest forms of data that R can handle, and every piece of data you will ever analyze is built from them."
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#why-r",
+    "href": "introduction/introduction-to-r.html#why-r",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "Content\n🔹 Advantages\nContent\n🔹 Disadvantages\nContent\n🔹 Companies that use R\nContent\n🔹 Applications of R\nContent"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#what-are-objects-and-variables",
+    "href": "introduction/introduction-to-r.html#what-are-objects-and-variables",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "In R, everything is an object. Variables are names that store objects.\n\n# Variable stores a value\nx &lt;- 10        # x is a variable holding the numeric object 10\nname &lt;- \"James\" # name is a variable holding the character object \"James\"\n\n🔹 The Assignment Operator\nContent here"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#naming-variables",
+    "href": "introduction/introduction-to-r.html#naming-variables",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "🔹 Rules (Must follow)\nContent\n🔹 Conventions (Recommended)\nContent"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#getting-help-in-r",
+    "href": "introduction/introduction-to-r.html#getting-help-in-r",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "Content here"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#next-section",
+    "href": "introduction/introduction-to-r.html#next-section",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "You now have a solid understanding of R’s atomic data types. However, in real-world data analysis, values are rarely used in isolation. In the next section, we will explore data structures in R. These include: vectors, characters, factors, lists, matrices, arrays, data frames, time series—which show how these basic types are combined and organized for analysis."
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#the-rstudio-layout",
+    "href": "introduction/introduction-to-r.html#the-rstudio-layout",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "Content here"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#quitting-r",
+    "href": "introduction/introduction-to-r.html#quitting-r",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "Content here"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#packages",
+    "href": "introduction/introduction-to-r.html#packages",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "Content here"
+  },
+  {
+    "objectID": "introduction/introduction-to-r.html#coming-up-next",
+    "href": "introduction/introduction-to-r.html#coming-up-next",
+    "title": "R Objects and Variables: Foundations of R Programming",
+    "section": "",
+    "text": "You now have a solid understanding of R’s atomic data types. However, in real-world data analysis, values are rarely used in isolation. In the next section, we will explore data structures in R. These include: vectors, characters, factors, lists, matrices, arrays, data frames, time series—which show how these basic types are combined and organized for analysis."
+  },
+  {
+    "objectID": "data-types/data-types.html#conditional-logic",
+    "href": "data-types/data-types.html#conditional-logic",
+    "title": "R Data Types: The Foundation of Programming",
+    "section": "5.1 Conditional Logic",
+    "text": "5.1 Conditional Logic\nConditional logic is the foundation of decision-making in programming, allowing R to evaluate conditions and execute different actions based on whether expressions are TRUE or FALSE. It is essential for building dynamic, intelligent, and rule-based systems.\n\n5.1.1 Logical Operators\nLogical operators in R enable the combination and evaluation of multiple conditions simultaneously. They form the backbone of complex decision-making by allowing expressions to be joined using AND, OR, and NOT logic.\n\n\n5.1.2 Relational (Comparison) Operators\nRelational operators are used to compare values and determine their relationship, such as equality, inequality, or ordering. These comparisons produce logical outcomes (TRUE or FALSE) that drive conditional execution in R.\n\n\n5.1.3 Membership and Other Special Operators\nMembership and special operators in R are used to test whether elements belong to a set, sequence, or structure, and to perform specialized operations that go beyond basic arithmetic and comparison. They are particularly useful in data filtering and pattern matching."
+  },
+  {
+    "objectID": "data-types/data-types.html#operator-precedence-highest-to-lowest",
+    "href": "data-types/data-types.html#operator-precedence-highest-to-lowest",
+    "title": "R Data Types: The Foundation of Programming",
+    "section": "5.2 Operator Precedence (Highest to Lowest)",
+    "text": "5.2 Operator Precedence (Highest to Lowest)\nOperator precedence defines the hierarchy that R follows when evaluating expressions with multiple operators. Understanding this order is crucial to ensuring expressions are interpreted correctly and produce expected results without ambiguity.\n🔹 Code Examples\nCheck if a customer qualifies for a senior discount (age ≥ 65):\n\nage &lt;- 72\nsenior_discount &lt;- age &gt;= 65\nprint(senior_discount)\n\n[1] TRUE\n\n\nDetermine if a patient has a fever (temperature &gt; 38.0°C):\n\ntemperature &lt;- 38.5\nhas_fever &lt;- temperature &gt; 38.0\nprint(has_fever)\n\n[1] TRUE\n\n\nCheck if a loan applicant meets multiple criteria (good credit AND stable income):\n\ncredit_score &lt;- 620\nstable_income &lt;- TRUE\nhas_good_credit &lt;- credit_score &gt;= 700\nloan_approved &lt;- has_good_credit & stable_income\nprint(loan_approved)\n\n[1] FALSE\n\n\nDetermine if a number is within a healthy BMI range (18.5 - 24.99):\n\nbmi &lt;- 28.3\nhealthy_bmi &lt;- bmi &gt;= 18.5 & bmi &lt;= 24.9\nprint(healthy_bmi)\n\n[1] FALSE\n\n\nCheck if a transaction is suspicious (amount &gt; 10000 OR foreign_country = TRUE):\n\ntransaction_amount &lt;- 15000\nis_foreign &lt;- FALSE\nsuspicious &lt;- transaction_amount &gt; 10000 | is_foreign\nprint(suspicious)\n\n[1] TRUE\n\n\n\n\n\n\n\n\nNotePractice Problems\n\n\n\n\nA patient’s blood pressure is 142/92. A doctor considers hypertension if systolic ≥ 140 OR diastolic ≥ 90. Write R code to determine if the patient has hypertension.\nA bank approves a loan if:\n\nCredit score ≥ 650 AND\nAnnual income ≥ 30,000 AND\nDebt-to-income ratio &lt; 0.43\n\nGiven:\n\ncredit score = 720\nincome = 45,000\ndebt-to-income = 0.35\n\nDetermine if the loan is approved.\nA customer gets a 20% discount if:\n\nThey are a loyalty member OR\nTheir cart total &gt; $100 OR\nIt’s their birthday month (assume birthday month = TRUE)\n\nGiven\n\nloyalty_member = FALSE\ncart_total = 85\nbirthday_month = TRUE\n\nDetermine discount.\nA product passes inspection if:\n\nWeight is between 9.8g and 10.2g (inclusive) AND\nDiameter is between 4.9cm and 5.1cm (inclusive)\n\nGiven:\n\nweight = 10.05\ndiameter = 5.12\n\nDoes the product pass?\nA vehicle can use the express lane if:\n\nIt has 3+ occupants OR\nIt is an electric vehicle OR\nThe driver paid for a premium pass\n\nGiven\n\noccupants = 2\nis_electric = TRUE\nhas_premium_pass = FALSE\n\nCan the vehicle use the express lane?\n\n\n\n\n\n\n\n\n\nTipAnswers\n\n\n\n\n\n\n# a: Hypertension screening\n\nsystolic &lt;- 142\ndiastolic &lt;- 92\n\nhas_hypertension &lt;- systolic &gt;= 140 | diastolic &gt;= 90\nprint(has_hypertension)\n\n[1] TRUE\n\n\n\n# b: Loan approval\n\ncredit_score &lt;- 720\nannual_income &lt;- 45000\ndebt_to_income &lt;- 0.35\n\ncredit_ok &lt;- credit_score &gt;= 650\nincome_ok &lt;- annual_income &gt;= 30000\ndti_ok &lt;- debt_to_income &lt; 0.43\n\nloan_approved &lt;- credit_ok & income_ok & dti_ok\nprint(loan_approved)\n\n[1] TRUE\n\n\n\n# c: Discount eligibility\n\nloyalty_member &lt;- FALSE\ncart_total &lt;- 85\nbirthday_month &lt;- TRUE\n\ndiscount_eligible &lt;- loyalty_member | cart_total &gt; 100 | birthday_month\nprint(discount_eligible)\n\n[1] TRUE\n\n\n\n# d: Product inspection\n\nweight &lt;- 10.05\ndiameter &lt;- 5.12\n\nweight_ok &lt;- weight &gt;= 9.8 & weight &lt;= 10.2\ndiameter_ok &lt;- diameter &gt;= 4.9 & diameter &lt;= 5.1\n\nproduct_passes &lt;- weight_ok & diameter_ok\nprint(product_passes)  # FALSE (fails on diameter)\n\n[1] FALSE\n\n\n\n# e: Express lane eligibility\n\noccupants &lt;- 2\nis_electric &lt;- TRUE\nhas_premium_pass &lt;- FALSE\n\nexpress_eligible &lt;- occupants &gt;= 3 | is_electric | has_premium_pass\nprint(express_eligible)\n\n[1] TRUE\n\n\n\n\n\n\n\n\n\n\n\nImportantFloating-Point Comparisons\n\n\n\nIn R, decimal numbers are stored using binary approximations, which can lead to small precision errors when comparing values.\n\nis_equal &lt;- 0.1 + 0.2 == 0.3\nis_equal\n\n[1] FALSE\n\n\nThis may return FALSE because of floating-point representation error, even though mathematically the values are equal.\nTo safely compare decimal numbers in R, use all.equal():\n\nis_equal &lt;- all.equal(0.1 + 0.2, 0.3)\nis_equal\n\n[1] TRUE"
+  },
+  {
+    "objectID": "data-types/data-types.html#operator-precedence",
+    "href": "data-types/data-types.html#operator-precedence",
+    "title": "R Data Types: The Foundation of Programming",
+    "section": "5.2 Operator Precedence",
+    "text": "5.2 Operator Precedence\nOperator precedence defines the hierarchy that R follows when evaluating expressions with multiple operators. Understanding this order is crucial to ensuring expressions are interpreted correctly and produce expected results without ambiguity.\n🔹 Code Examples\nCheck if a customer qualifies for a senior discount (age ≥ 65):\n\nage &lt;- 72\nsenior_discount &lt;- age &gt;= 65\nprint(senior_discount)\n\n[1] TRUE\n\n\nDetermine if a patient has a fever (temperature &gt; 38.0°C):\n\ntemperature &lt;- 38.5\nhas_fever &lt;- temperature &gt; 38.0\nprint(has_fever)\n\n[1] TRUE\n\n\nCheck if a loan applicant meets multiple criteria (good credit AND stable income):\n\ncredit_score &lt;- 620\nstable_income &lt;- TRUE\nhas_good_credit &lt;- credit_score &gt;= 700\nloan_approved &lt;- has_good_credit & stable_income\nprint(loan_approved)\n\n[1] FALSE\n\n\nDetermine if a number is within a healthy BMI range (18.5 - 24.99):\n\nbmi &lt;- 28.3\nhealthy_bmi &lt;- bmi &gt;= 18.5 & bmi &lt;= 24.9\nprint(healthy_bmi)\n\n[1] FALSE\n\n\nCheck if a transaction is suspicious (amount &gt; 10000 OR foreign_country = TRUE):\n\ntransaction_amount &lt;- 15000\nis_foreign &lt;- FALSE\nsuspicious &lt;- transaction_amount &gt; 10000 | is_foreign\nprint(suspicious)\n\n[1] TRUE\n\n\n\n\n\n\n\n\nNotePractice Problems\n\n\n\n\nA patient’s blood pressure is 142/92. A doctor considers hypertension if systolic ≥ 140 OR diastolic ≥ 90. Write R code to determine if the patient has hypertension.\nA bank approves a loan if:\n\nCredit score ≥ 650 AND\nAnnual income ≥ 30,000 AND\nDebt-to-income ratio &lt; 0.43\n\nGiven:\n\ncredit score = 720\nincome = 45,000\ndebt-to-income = 0.35\n\nDetermine if the loan is approved.\nA customer gets a 20% discount if:\n\nThey are a loyalty member OR\nTheir cart total &gt; $100 OR\nIt’s their birthday month (assume birthday month = TRUE)\n\nGiven\n\nloyalty_member = FALSE\ncart_total = 85\nbirthday_month = TRUE\n\nDetermine discount.\nA product passes inspection if:\n\nWeight is between 9.8g and 10.2g (inclusive) AND\nDiameter is between 4.9cm and 5.1cm (inclusive)\n\nGiven:\n\nweight = 10.05\ndiameter = 5.12\n\nDoes the product pass?\nA vehicle can use the express lane if:\n\nIt has 3+ occupants OR\nIt is an electric vehicle OR\nThe driver paid for a premium pass\n\nGiven\n\noccupants = 2\nis_electric = TRUE\nhas_premium_pass = FALSE\n\nCan the vehicle use the express lane?\n\n\n\n\n\n\n\n\n\nTipAnswers\n\n\n\n\n\n\n# a: Hypertension screening\n\nsystolic &lt;- 142\ndiastolic &lt;- 92\n\nhas_hypertension &lt;- systolic &gt;= 140 | diastolic &gt;= 90\nprint(has_hypertension)\n\n[1] TRUE\n\n\n\n# b: Loan approval\n\ncredit_score &lt;- 720\nannual_income &lt;- 45000\ndebt_to_income &lt;- 0.35\n\ncredit_ok &lt;- credit_score &gt;= 650\nincome_ok &lt;- annual_income &gt;= 30000\ndti_ok &lt;- debt_to_income &lt; 0.43\n\nloan_approved &lt;- credit_ok & income_ok & dti_ok\nprint(loan_approved)\n\n[1] TRUE\n\n\n\n# c: Discount eligibility\n\nloyalty_member &lt;- FALSE\ncart_total &lt;- 85\nbirthday_month &lt;- TRUE\n\ndiscount_eligible &lt;- loyalty_member | cart_total &gt; 100 | birthday_month\nprint(discount_eligible)\n\n[1] TRUE\n\n\n\n# d: Product inspection\n\nweight &lt;- 10.05\ndiameter &lt;- 5.12\n\nweight_ok &lt;- weight &gt;= 9.8 & weight &lt;= 10.2\ndiameter_ok &lt;- diameter &gt;= 4.9 & diameter &lt;= 5.1\n\nproduct_passes &lt;- weight_ok & diameter_ok\nprint(product_passes)  # FALSE (fails on diameter)\n\n[1] FALSE\n\n\n\n# e: Express lane eligibility\n\noccupants &lt;- 2\nis_electric &lt;- TRUE\nhas_premium_pass &lt;- FALSE\n\nexpress_eligible &lt;- occupants &gt;= 3 | is_electric | has_premium_pass\nprint(express_eligible)\n\n[1] TRUE\n\n\n\n\n\n\n\n\n\n\n\nImportantFloating-Point Comparisons\n\n\n\nIn R, decimal numbers are stored using binary approximations, which can lead to small precision errors when comparing values.\n\nis_equal &lt;- 0.1 + 0.2 == 0.3\nis_equal\n\n[1] FALSE\n\n\nThis may return FALSE because of floating-point representation error, even though mathematically the values are equal.\nTo safely compare decimal numbers in R, use all.equal():\n\nis_equal &lt;- all.equal(0.1 + 0.2, 0.3)\nis_equal\n\n[1] TRUE"
+  },
+  {
+    "objectID": "conditional-logic/conditional-logic.html",
+    "href": "conditional-logic/conditional-logic.html",
+    "title": "Conditional Logic: Making Decisions with Data",
+    "section": "",
+    "text": "1 Introduction\nConditional logic is the foundation of decision-making in programming, allowing R to evaluate conditions and execute different actions based on whether expressions are TRUE or FALSE. It is essential for building dynamic, intelligent, and rule-based systems.\n\n\n2 Logical Operators\nLogical operators in R enable the combination and evaluation of multiple conditions simultaneously. They form the backbone of complex decision-making by allowing expressions to be joined using AND, OR, and NOT logic.\n\n\n\n\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n&\nAND (vectorized)\nc(TRUE, TRUE) & c(TRUE, FALSE)\nTRUE FALSE\n\n\n|\nOR (vectorized)\nc(TRUE, FALSE) | c(FALSE, FALSE)\nTRUE FALSE\n\n\n!\nNOT\n!TRUE\nFALSE\n\n\n&&\nAND (scalar, short-circuit)\nTRUE && FALSE\nFALSE\n\n\n||\nOR (scalar, short-circuit)\nTRUE || FALSE\nTRUE\n\n\nxor()\nExclusive OR (exactly one is TRUE)\nxor(TRUE, TRUE)\nFALSE\n\n\nisTRUE()\nChecks if expression is TRUE\nisTRUE(5 &gt; 3)\nTRUE\n\n\nisFALSE()\nChecks if expression is FALSE\nisFALSE(5 &gt; 3)\nFALSE\n\n\n\n\n\n3 Relational (Comparison) Operators\nRelational operators are used to compare values and determine their relationship, such as equality, inequality, or ordering. These comparisons produce logical outcomes (TRUE or FALSE) that drive conditional execution in R.\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\n5 == 5\nTRUE\n\n\n!=\nNot equal to\n5 != 3\nTRUE\n\n\n&gt;\nGreater than\n5 &gt; 3\nTRUE\n\n\n&lt;\nLess than\n5 &lt; 3\nFALSE\n\n\n&gt;=\nGreater than or equal to\n5 &gt;= 5\nTRUE\n\n\n&lt;=\nLess than or equal to\n3 &lt;= 5\nTRUE\n\n\n\n\n\n4 Membership and Other Special Operators\nMembership and special operators in R are used to test whether elements belong to a set, sequence, or structure, and to perform specialized operations that go beyond basic arithmetic and comparison. They are particularly useful in data filtering and pattern matching.\n\n\n\n\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n%in%\nValue matching (membership)\n\"apple\" %in% c(\"apple\", \"banana\")\nTRUE\n\n\n%in%\nMultiple values membership\nc(2, 5) %in% c(1, 2, 3, 4)\nTRUE FALSE\n\n\nidentical()\nTests exact equality of objects\nidentical(1L, 1)\nFALSE\n\n\nall.equal()\nTests near equality (numeric tolerance)\nall.equal(0.1 + 0.2, 0.3)\nTRUE\n\n\nany()\nAt least one element is TRUE\nany(c(FALSE, FALSE, TRUE))\nTRUE\n\n\nall()\nAll elements are TRUE\nall(c(TRUE, TRUE, FALSE))\nFALSE\n\n\n\n\n\n5 Operator Precedence\nOperator precedence defines the hierarchy that R follows when evaluating expressions with multiple operators. Understanding this order is crucial to ensuring expressions are interpreted correctly and produce expected results without ambiguity.\n\n\n\nPrecedence\nOperators\nDescription\n\n\n\n\n1\n()\nParentheses\n\n\n2\n!\nLogical NOT\n\n\n3\n:\nSequence operator\n\n\n4\n*, /\nMultiplication, Division\n\n\n5\n+, -\nAddition, Subtraction\n\n\n6\n&gt;, &lt;, &gt;=, &lt;=\nRelational operators\n\n\n7\n==, !=\nEquality operators\n\n\n8\n&\nLogical AND (vectorized)\n\n\n9\n&&\nLogical AND (short-circuit)\n\n\n10\n|\nLogical OR (vectorized)\n\n\n11\n||\nLogical OR (short-circuit)\n\n\n12\n=\nAssignment (left to right)\n\n\n13\n&lt;-\nAssignment (right to left)"
+  },
+  {
+    "objectID": "conditional-logic/conditional-logic.html#conditional-logic",
+    "href": "conditional-logic/conditional-logic.html#conditional-logic",
+    "title": "Conditional Logic: Making Decisions with Data",
+    "section": "",
+    "text": "Conditional logic is the foundation of decision-making in programming, allowing R to evaluate conditions and execute different actions based on whether expressions are TRUE or FALSE. It is essential for building dynamic, intelligent, and rule-based systems.\n\n\nLogical operators in R enable the combination and evaluation of multiple conditions simultaneously. They form the backbone of complex decision-making by allowing expressions to be joined using AND, OR, and NOT logic.\n\n\n\n\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n&\nAND (vectorized)\nc(TRUE, TRUE) & c(TRUE, FALSE)\nTRUE FALSE\n\n\n|\nOR (vectorized)\nc(TRUE, FALSE) | c(FALSE, FALSE)\nTRUE FALSE\n\n\n!\nNOT\n!TRUE\nFALSE\n\n\n&&\nAND (scalar, short-circuit)\nTRUE && FALSE\nFALSE\n\n\n||\nOR (scalar, short-circuit)\nTRUE || FALSE\nTRUE\n\n\nxor()\nExclusive OR (exactly one is TRUE)\nxor(TRUE, TRUE)\nFALSE\n\n\nisTRUE()\nChecks if expression is TRUE\nisTRUE(5 &gt; 3)\nTRUE\n\n\nisFALSE()\nChecks if expression is FALSE\nisFALSE(5 &gt; 3)\nFALSE\n\n\n\n\n\n\nRelational operators are used to compare values and determine their relationship, such as equality, inequality, or ordering. These comparisons produce logical outcomes (TRUE or FALSE) that drive conditional execution in R.\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n==\nEqual to\n5 == 5\nTRUE\n\n\n!=\nNot equal to\n5 != 3\nTRUE\n\n\n&gt;\nGreater than\n5 &gt; 3\nTRUE\n\n\n&lt;\nLess than\n5 &lt; 3\nFALSE\n\n\n&gt;=\nGreater than or equal to\n5 &gt;= 5\nTRUE\n\n\n&lt;=\nLess than or equal to\n3 &lt;= 5\nTRUE\n\n\n\n\n\n\nMembership and special operators in R are used to test whether elements belong to a set, sequence, or structure, and to perform specialized operations that go beyond basic arithmetic and comparison. They are particularly useful in data filtering and pattern matching.\n\n\n\n\n\n\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n%in%\nValue matching (membership)\n\"apple\" %in% c(\"apple\", \"banana\")\nTRUE\n\n\n%in%\nMultiple values membership\nc(2, 5) %in% c(1, 2, 3, 4)\nTRUE FALSE\n\n\nidentical()\nTests exact equality of objects\nidentical(1L, 1)\nFALSE\n\n\nall.equal()\nTests near equality (numeric tolerance)\nall.equal(0.1 + 0.2, 0.3)\nTRUE\n\n\nany()\nAt least one element is TRUE\nany(c(FALSE, FALSE, TRUE))\nTRUE\n\n\nall()\nAll elements are TRUE\nall(c(TRUE, TRUE, FALSE))\nFALSE"
+  },
+  {
+    "objectID": "conditional-logic/conditional-logic.html#operator-precedence",
+    "href": "conditional-logic/conditional-logic.html#operator-precedence",
+    "title": "Conditional Logic: Making Decisions with Data",
+    "section": "2 Operator Precedence",
+    "text": "2 Operator Precedence\nOperator precedence defines the hierarchy that R follows when evaluating expressions with multiple operators. Understanding this order is crucial to ensuring expressions are interpreted correctly and produce expected results without ambiguity.\n\n\n\nPrecedence\nOperators\nDescription\n\n\n\n\n1\n()\nParentheses\n\n\n2\n!\nLogical NOT\n\n\n3\n:\nSequence operator\n\n\n4\n*, /\nMultiplication, Division\n\n\n5\n+, -\nAddition, Subtraction\n\n\n6\n&gt;, &lt;, &gt;=, &lt;=\nRelational operators\n\n\n7\n==, !=\nEquality operators\n\n\n8\n&\nLogical AND (vectorized)\n\n\n9\n&&\nLogical AND (short-circuit)\n\n\n10\n|\nLogical OR (vectorized)\n\n\n11\n||\nLogical OR (short-circuit)\n\n\n12\n=\nAssignment (left to right)\n\n\n13\n&lt;-\nAssignment (right to left)"
+  },
+  {
+    "objectID": "data-structures/data-structures.html",
+    "href": "data-structures/data-structures.html",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "",
+    "text": "To get the most out of R, professionals need hands-on mastery of its core data structures including: vector, factor, list, matrix, array, data frame, and time series—because these are the objects you’ll manipulate daily. In this module, you’ll move beyond theory and learn to operate on each structure, convert between them efficiently, and avoid the object conversion errors that frustrate most beginners. You’ll work with real scenarios where choosing the wrong structure breaks your analysis, and you’ll build the fluency to select, transform, and troubleshoot the right structure for any task.\n\n\n\n\n\n\nTipLearning Objectives\n\n\n\nAt the end of this section, the learner should be able to:\n✅ Distinguish between the major data structures in R: vectors, factors, lists, matrices, arrays, data frames, and time series.\n✅ Create each data structure using appropriate R functions: c(), factor(), list(), matrix(), array(), data.frame(), ts().\n✅ Inspect data structures using typeof(), class(), str(), and dim() functions.\n✅ Determine the dimensionality (1D, 2D, or ND) and homogeneity (same type vs. mixed) of each structure.\n✅ Select the appropriate data structure for different research scenarios (e.g., factors for categories, data frames for mixed datasets).\n✅ Convert between data structures when necessary (e.g., matrix to data frame, list to vector).\n\n\nThe R programming language has the following data structures.\n\nVector\nFactor\nList\nMatrix\nArray\nData frame\nTime series\n\nThe functions class() and typeof() are used to examine the data type and internal storage mode of R objects. For a more comprehensive view, str() provides the complete structure of an object."
+  },
+  {
+    "objectID": "data-structures/data-structures.html#vector-creation-functions",
+    "href": "data-structures/data-structures.html#vector-creation-functions",
+    "title": "R Data Structures: Building the Architecture of Your Data",
+    "section": "2.1 Vector Creation Functions",
+    "text": "2.1 Vector Creation Functions\n\n2.1.1"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#naming-vector-elements",
+    "href": "data-structures/data-structures.html#naming-vector-elements",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.2 Naming Vector Elements",
+    "text": "2.2 Naming Vector Elements\nNames make vectors self-documenting and enable name-based subsetting.\nTwo Ways to Create Named Vectors\nMethod 1: Assign names during creation\n\nsales &lt;- c(Qtr1 = 6852, Qtr2 = 7230, Qtr3 = 4170, Qtr4 = 5714)\nprint(sales)\n\nQtr1 Qtr2 Qtr3 Qtr4 \n6852 7230 4170 5714 \n\n\nMethod 2: Create vector first, then add names\n\nmonthly_sales &lt;- c(\n  5112, 6422, 4145, 5682, 5773, 3555,\n  6841, 5829, 5206, 6170, 7233, 4499\n)\n\nnames(monthly_sales) &lt;- month.abb\nprint(monthly_sales)\n\n Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec \n5112 6422 4145 5682 5773 3555 6841 5829 5206 6170 7233 4499 \n\n\nAccessing Named Elements\nRetrieve vector elements using their assigned names.\nRetrieve a single value\n\njan_sales &lt;- monthly_sales[\"Jan\"]\nprint(jan_sales)\n\n Jan \n5112 \n\n\nRetrieve multiple single values\n\nqtr1_sales &lt;- monthly_sales[c(\"Jan\", \"Feb\", \"Mar\")]\nprint(qtr1_sales)\n\n Jan  Feb  Mar \n5112 6422 4145 \n\n\nRetrieve all Names of Named Vector\nUse names() to view all assigned names in a vector.\n\nmonths &lt;- names(monthly_sales)\nprint(months)\n\n [1] \"Jan\" \"Feb\" \"Mar\" \"Apr\" \"May\" \"Jun\" \"Jul\" \"Aug\" \"Sep\" \"Oct\" \"Nov\" \"Dec\"\n\n\nRetrieve all Values of Named Vector\nExtract the actual data stored in the vector.\n\nsales &lt;- unname(monthly_sales)\nprint(sales)\n\n [1] 5112 6422 4145 5682 5773 3555 6841 5829 5206 6170 7233 4499\n\n\nNote that the above is equivalent to removing the names, which can also be achieved as follows.\n\nnames(monthly_sales) &lt;- NULL\nprint(sales)\n\n [1] 5112 6422 4145 5682 5773 3555 6841 5829 5206 6170 7233 4499"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#creating-vectors",
+    "href": "data-structures/data-structures.html#creating-vectors",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.1 Creating Vectors",
+    "text": "2.1 Creating Vectors\nR provides multiple flexible methods to build vectors from scratch. This section walks you through each approach hands-on, giving you the practice and confidence to create the right vector for any analysis task you will encounter.\n\n2.1.1 Combine/concatenate values\nCombine individual values into a vector using the function c().\nNumeric vector\nThis is vector whose elements are all numeric (double or integers).\n\nsystolic_bp &lt;- c(125, 105, 143, 132, 116)\nprint(systolic_bp)\n\n[1] 125 105 143 132 116\n\n\nCharacter vector\nThis is a vector where every element is stored as text (character data type), enclosed in quotation marks.\n\npreferred_comm_channel &lt;- c(\"Email\", \"SMS\", \"Phone\", \"WhatsApp\")\nprint(preferred_comm_channel)\n\n[1] \"Email\"    \"SMS\"      \"Phone\"    \"WhatsApp\"\n\n\n\n\n2.1.2 Create numeric sequences\nGenerate sequences of consecutive numbers with a simple colon operator.\n\n# Monitor progress across the first 7 days of a project\n\nproject_days &lt;- 1:7\nprint(project_days)\n\n[1] 1 2 3 4 5 6 7\n\n\n\nproject_days &lt;- 7:1 # Decreasing sequence\nprint(project_days)\n\n[1] 7 6 5 4 3 2 1\n\n\n\n\n2.1.3 Generate linearly-spaced sequences\nCreate evenly spaced sequences using seq() with either a step size (by) or a fixed number of elements (length.out).\nSpecify increment\n\n# Measure observations at 2-hour intervals\n\nobservation_times &lt;- seq(from = 0, to = 24, by = 2)\nprint(observation_times)\n\n [1]  0  2  4  6  8 10 12 14 16 18 20 22 24\n\n\nSpecify number of elements\n\n# Generate 50 evenly spaced points from 0 to 2π\n\ntheta &lt;- seq(from = 0, to = 2 * pi, length.out = 50)\nprint(theta)\n\n [1] 0.0000000 0.1282283 0.2564565 0.3846848 0.5129131 0.6411414 0.7693696\n [8] 0.8975979 1.0258262 1.1540544 1.2822827 1.4105110 1.5387393 1.6669675\n[15] 1.7951958 1.9234241 2.0516523 2.1798806 2.3081089 2.4363372 2.5645654\n[22] 2.6927937 2.8210220 2.9492502 3.0774785 3.2057068 3.3339351 3.4621633\n[29] 3.5903916 3.7186199 3.8468481 3.9750764 4.1033047 4.2315330 4.3597612\n[36] 4.4879895 4.6162178 4.7444460 4.8726743 5.0009026 5.1291309 5.2573591\n[43] 5.3855874 5.5138157 5.6420439 5.7702722 5.8985005 6.0267288 6.1549570\n[50] 6.2831853\n\n\nThe vector generated above can then be used, for example, to compute sine values, which are subsequently plotted to form a smooth sine curve. This is illustrated below.\n\n# Compute sine values\n\ny &lt;- sin(theta)\n\n# Plot the sine curve\nplot(\n  theta,\n  y,\n  type = \"l\",\n  col = \"blue\",\n  las = 1,\n  main = \"Sine Wave from 0 to 2π\",\n  xlab = \"Angle (radians)\", ylab = \"sin(theta)\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteDecreasing Sequence\n\n\n\nTo create a decreasing sequence, set a from value that is larger than the to value, and use a negative value for by if specifying a step size.\n\n# Cooling process\n\ntemperature &lt;- seq(from = 100, to = 20, by = -5)\nprint(temperature)\n\n [1] 100  95  90  85  80  75  70  65  60  55  50  45  40  35  30  25  20\n\n\n\n\n\n\n2.1.4 Repeat values\nDuplicate values multiple times using rep().\n\n# 8 respondents selected \"Yes\"\n\nresponse &lt;- rep(\"Yes\", times = 8)\nprint(response)\n\n[1] \"Yes\" \"Yes\" \"Yes\" \"Yes\" \"Yes\" \"Yes\" \"Yes\" \"Yes\"\n\n\n\n# Two treatment groups, each with 6 participants\n\ngroup &lt;- rep(c(\"Control\", \"Treatment\"), each = 6)\nprint(group)\n\n [1] \"Control\"   \"Control\"   \"Control\"   \"Control\"   \"Control\"   \"Control\"  \n [7] \"Treatment\" \"Treatment\" \"Treatment\" \"Treatment\" \"Treatment\" \"Treatment\"\n\n\n\n# 4 participants in Control group\n# 3 participants in Treatment group\n\ngroup &lt;- rep(c(\"Control\", \"Treatment\"), times = c(4, 3))\nprint(group)\n\n[1] \"Control\"   \"Control\"   \"Control\"   \"Control\"   \"Treatment\" \"Treatment\"\n[7] \"Treatment\"\n\n\n\n\n2.1.5 Generate factors with patterned levels\nCreate factors with repeating level patterns using gl(). This is commonly used in experimental design, ANOVA and grouped data.\n\n# General syntax\n\ngl(n, k, labels = NULL)\n\n# where\n  # n : number of levels  \n  # k : number of repetitions for each level  \n  # labels : optional names for levels  \n\n\ngroups &lt;- c(\"Control\", \"Treatment\")\n\ngroup &lt;- gl(n = length(groups), k = 3, labels = groups)\nprint(group)\n\n[1] Control   Control   Control   Treatment Treatment Treatment\nLevels: Control Treatment\n\n\n\n\n\n\n\n\nTipMemory Tip\n\n\n\n\nrep() → repeats values you already have and returns a character vector\ngl() → generates new structured factor levels automatically\n\n\n\n\n\n2.1.6 Random Variates from Probability Distribution Functions\nUse functions like rnorm(), rbinom(), and rpois() to simulate data from statistical distributions. The set.seed() function is used to ensure that the same random values are generated each time the code is run, making results reproducible.\n5 random variates from Normal distribution with \\(\\mu = 0\\) and \\(\\sigma = 1\\)\n\nset.seed(12345) # for reproducibility (same values every time)\n\nx = rnorm(5, mean = 0, sd = 1)\nprint(x)\n\n[1]  0.5855288  0.7094660 -0.1093033 -0.4534972  0.6058875\n\n\n5 random variates from Binomial distribution with size \\(n = 10\\) and probability of success \\(p = 0.5\\)\n\nset.seed(12345)\n\nx = rbinom(5, size = 10, prob = 0.5)\nprint(x)\n\n[1] 6 7 6 7 5\n\n\n5 random variates from Poison distribution with \\(\\mu = 3\\)\n\nset.seed(12345)\n\nx = rpois(5, lambda = 3)\nprint(x)\n\n[1] 4 5 4 5 3\n\n\nRandom variates from other statistical distributions can be generated in a similar way using their corresponding functions.\n\n\n2.1.7 Vector of Letters and Months using Built-in Constants\nAccess pre-defined vectors for uppercase letters (LETTERS), lowercase letters (letters), month abbreviations (month.abb), and full month names (month.name).\n\n\n\n\n\n\n\n\nConstant\nDescription\nResult\n\n\n\n\nLETTERS\nUppercase English alphabet letters\n\"A\" \"B\" \"C\" ... \"Z\"\n\n\nletters\nLowercase English alphabet letters\n\"a\" \"b\" \"c\" ... \"z\"\n\n\nmonth.abb\nAbbreviated month names\n\"Jan\" \"Feb\" \"Mar\" ... \"Dec\"\n\n\nmonth.name\nFull month names\n\"January\" \"February\" ... \"December\""
+  },
+  {
+    "objectID": "data-structures/data-structures.html#memory-tip",
+    "href": "data-structures/data-structures.html#memory-tip",
+    "title": "R Data Structures: Building the Architecture of Your Data",
+    "section": "2.2 Memory Tip",
+    "text": "2.2 Memory Tip\nrep() → repeats values you already have gl() → generates new structured factor levels automatically"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#operations-on-vectors",
+    "href": "data-structures/data-structures.html#operations-on-vectors",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.3 Operations on Vectors",
+    "text": "2.3 Operations on Vectors\nMost operations that occur in mathematics can be applied to vectors to produce new results. These operations and functions are presented in the table below."
+  },
+  {
+    "objectID": "data-structures/data-structures.html#slicing-and-indexing-vectors",
+    "href": "data-structures/data-structures.html#slicing-and-indexing-vectors",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.4 Slicing and Indexing Vectors",
+    "text": "2.4 Slicing and Indexing Vectors\nThe knowledge of Slicing objects in R will be very critical when handling most of the statistical, datascience, machine learning and artificial intelligence routines. In this section, we demonstrate briefly how to index and slice vector objects."
+  },
+  {
+    "objectID": "data-structures/data-structures.html#replacing-elements-of-a-vector",
+    "href": "data-structures/data-structures.html#replacing-elements-of-a-vector",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.5 Replacing elements of a vector",
+    "text": "2.5 Replacing elements of a vector\nIn real-world data work, you will frequently replace values in a vector—either by typing them directly or deriving them from calculations. R provides powerful tools for this, but this section focuses on the basic techniques you will reach for every day.\n\noriginal_scores &lt;- c(43, 62, 50, 45, 35, 28, 31, 34, 38, 41)\n\n# replace elements in positions 2, 7 and 4 \n# with 200, 400 and 300 respectively\nmodified_scores &lt;- original_scores  # create a copy\n\nmodified_scores[c(2, 7, 4)] &lt;- c(200, 400, 300)\n\n# combine into data frame (for viewing)\ncomparison_table &lt;- data.frame(\n  Original = original_scores,\n  Modified = modified_scores\n)\n\nprint(comparison_table)\n\n   Original Modified\n1        43       43\n2        62      200\n3        50       50\n4        45      300\n5        35       35\n6        28       28\n7        31      400\n8        34       34\n9        38       38\n10       41       41\n\n\n\nscores &lt;- c(43, 62, 50, 45, 35, 28, 31, 34, 38, 41)\n\n# create a copy of the original vector\nmodified_scores &lt;- scores\n\n# multiply even `scores` by 10\nmodified_scores[modified_scores %% 2 == 0] &lt;- \n  modified_scores[modified_scores %% 2 == 0] * 10\n\n# combine into data frame (for comparison)\ncomparison_table &lt;- data.frame(\n  Original = scores,\n  Modified = modified_scores\n)\n\nprint(comparison_table)\n\n   Original Modified\n1        43       43\n2        62      620\n3        50      500\n4        45       45\n5        35       35\n6        28      280\n7        31       31\n8        34      340\n9        38      380\n10       41       41"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#sorting-values-of-vector",
+    "href": "data-structures/data-structures.html#sorting-values-of-vector",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.6 Sorting values of vector",
+    "text": "2.6 Sorting values of vector\nUse the sort() function to order numeric or character vectors in ascending or descending sequence. The decreasing argument controls the sort direction: FALSE (default) for ascending order, TRUE for descending order. When missing values are present, the na.last argument determines their placement: TRUE positions NAs at the end, FALSE places them at the beginning, and NA removes them entirely from the output.\nData\n\nu = c(NA, \"A\", \"B\", \"F\", \"D\", NA, \"K\", \"M\", \"D\", \"C\")\nprint(u)\n\n [1] NA  \"A\" \"B\" \"F\" \"D\" NA  \"K\" \"M\" \"D\" \"C\"\n\n\nCharacter vector: Decreasing order, missing values at the beginning\n\nv = sort(u, decreasing = TRUE, na.last = FALSE)\nprint(v)\n\n [1] NA  NA  \"M\" \"K\" \"F\" \"D\" \"D\" \"C\" \"B\" \"A\"\n\n\nNumeric vector: Ascending order, missing values at the end\n\nx = c(26, 35, NA, 38, NA, 31, 40, 28, 35)\n\ny = sort(x, decreasing = FALSE, na.last = TRUE)\nprint(y)\n\n[1] 26 28 31 35 35 38 40 NA NA"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#adding-ranks-to-a-vector",
+    "href": "data-structures/data-structures.html#adding-ranks-to-a-vector",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "2.7 Adding ranks to a vector",
+    "text": "2.7 Adding ranks to a vector\nUse the rank() function to assign ranks to elements of a vector. The ties.method argument specifies how tied values should be handled, with options including \"min\", \"max\", \"first\", \"average\", and \"random\". The na.last argument controls the placement of missing values, accepting TRUE (NAs at the end), FALSE (NAs at the beginning), NA (remove NAs), or \"keep\" (preserve NAs with rank NA).\nData\n\nu = c(26, 35, NA, 38, NA, 31, 38, 28, 35)\nprint(u)\n\n[1] 26 35 NA 38 NA 31 38 28 35\n\n\nExclude missing values before ranking\n\nv = rank(u, ties.method = \"min\", na.last = NA)\nprint(v)\n\n[1] 1 4 6 3 6 2 4\n\n\nRank the first of the tied values first and retain missing values but do not rank them\n\nv = rank(u, ties.method = \"first\", na.last = \"keep\")\n\ndata = data.frame(v = u, Ranks = v)\nprint(data)\n\n   v Ranks\n1 26     1\n2 35     4\n3 NA    NA\n4 38     6\n5 NA    NA\n6 31     3\n7 38     7\n8 28     2\n9 35     5\n\n\nTake average ranks, and missing values should be ranked last\n\nv = rank(u, ties.method = \"average\", na.last = TRUE)\n\ndata = data.frame(v = u, Ranks = v)\nprint(data)\n\n   v Ranks\n1 26   1.0\n2 35   4.5\n3 NA   8.0\n4 38   6.5\n5 NA   9.0\n6 31   3.0\n7 38   6.5\n8 28   2.0\n9 35   4.5\n\n\nTake average ranks, and missing values should be ranked first\n\nv = rank(u, ties.method = \"average\", na.last = FALSE)\n\ndata = data.frame(v = u, Ranks = v)\nprint(data)\n\n   v Ranks\n1 26   3.0\n2 35   6.5\n3 NA   1.0\n4 38   8.5\n5 NA   2.0\n6 31   5.0\n7 38   8.5\n8 28   4.0\n9 35   6.5"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#converting-character-vectors-to-factors",
+    "href": "data-structures/data-structures.html#converting-character-vectors-to-factors",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "3.2 Converting Character Vectors to Factors",
+    "text": "3.2 Converting Character Vectors to Factors\nConverting character variables to factors is useful for several reasons:\n\nEnables categorical-specific statistical modeling\nControls level order in tables and plots\nImproves memory efficiency with repeated values\nAllows ordered categories for ordinal data\n\nThe example below demonstrates the result of using table() on a character vector before conversion to a factor.\n\nlibrary(tidyr)\nlibrary(dplyr)\n\ntab &lt;- tibble(ses = ses) %&gt;% count(ses) %&gt;% as.data.frame()\nprint(tab)\n\n     ses  n\n1   High  9\n2    Low 16\n3 Middle 35\n\n\nIssue identified: The categories appear in alphabetical order (High, Low, Middle), which is not meaningful for this variable.\nDesired order: Low → Middle → High since this is an ordinal variable (order is important).\nSolution: Convert ses to a factor and specify the correct level order using the levels argument.\n\nses_factor &lt;- factor(ses, levels = c(\"Low\", \"Middle\", \"High\"))\nprint(ses_factor)\n\n [1] Middle Middle Middle Low    High   Middle Middle Low    Middle Middle\n[11] Middle Middle Middle Middle High   Middle Middle High   Low    Low   \n[21] Middle Low    Middle Middle Middle Low    Middle Middle Low    Middle\n[31] Middle High   High   Low    Middle Low    Middle High   Low    Middle\n[41] Middle Middle Middle Middle Low    High   Low    Middle Middle Low   \n[51] Middle Low    Middle Middle Middle Low    Middle High   Low    High  \nLevels: Low Middle High\n\n\nNow tabulate the results again and note that socio-economic status have been presented in the correct order.\n\ntab &lt;- tibble(ses = ses_factor) %&gt;%\n  count(ses) %&gt;%\n  as.data.frame()\nprint(tab)\n\n     ses  n\n1    Low 16\n2 Middle 35\n3   High  9\n\n\nUnlike the alphabetical order seen earlier, the table now arranges categories in the desired logical sequence: (Low, Middle, High) making the output more meaningful for interpretation."
+  },
+  {
+    "objectID": "data-structures/data-structures.html#create-a-random-vector-of-socio-economic-status-ses",
+    "href": "data-structures/data-structures.html#create-a-random-vector-of-socio-economic-status-ses",
+    "title": "R Data Structures: Building the Architecture of Your Data",
+    "section": "3.1 Create a random vector of socio-economic status (ses)",
+    "text": "3.1 Create a random vector of socio-economic status (ses)\n\nses = sample(\n  x = c(\"Low\", \"Middle\", \"High\"),\n  size = 60,\n  replace = TRUE,\n  prob = c(25, 60, 15)\n)\nprint(ses)\n\n [1] \"Middle\" \"Middle\" \"Middle\" \"Low\"    \"High\"   \"Middle\" \"Middle\" \"Low\"   \n [9] \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"High\"   \"Middle\"\n[17] \"Middle\" \"High\"   \"Low\"    \"Low\"    \"Middle\" \"Low\"    \"Middle\" \"Middle\"\n[25] \"Middle\" \"Low\"    \"Middle\" \"Middle\" \"Low\"    \"Middle\" \"Middle\" \"High\"  \n[33] \"High\"   \"Low\"    \"Middle\" \"Low\"    \"Middle\" \"High\"   \"Low\"    \"Middle\"\n[41] \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"Low\"    \"High\"   \"Low\"    \"Middle\"\n[49] \"Middle\" \"Low\"    \"Middle\" \"Low\"    \"Middle\" \"Middle\" \"Middle\" \"Low\"   \n[57] \"Middle\" \"High\"   \"Low\"    \"High\""
+  },
+  {
+    "objectID": "data-structures/data-structures.html#ordered-factor",
+    "href": "data-structures/data-structures.html#ordered-factor",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "3.3 Ordered Factor",
+    "text": "3.3 Ordered Factor\nAn ordered factor is a factor where the levels have a natural order or ranking. Unlike standard (nominal) factors where levels have no inherent sequence, ordered factors preserve the directional relationship between categories (e.g., Low &lt; Medium &lt; High).\nTo preserve a logical sequence among categories, create an ordered factor using ordered(). This function mirrors factor() in syntax and arguments. The example below demonstrates converting the ses vector into an ordered factor with the correct level order.\n\nses &lt;- ordered(ses, levels = c(\"Low\", \"Middle\", \"High\"))\nses\n\n [1] Middle Middle Middle Low    High   Middle Middle Low    Middle Middle\n[11] Middle Middle Middle Middle High   Middle Middle High   Low    Low   \n[21] Middle Low    Middle Middle Middle Low    Middle Middle Low    Middle\n[31] Middle High   High   Low    Middle Low    Middle High   Low    Middle\n[41] Middle Middle Middle Middle Low    High   Low    Middle Middle Low   \n[51] Middle Low    Middle Middle Middle Low    Middle High   Low    High  \nLevels: Low &lt; Middle &lt; High\n\n\nThe ordered() syntax above is equivalent to using factor() with ordered = TRUE:\n\nses &lt;- factor(\n  ses,\n  levels = c(\"Low\", \"Middle\", \"High\"),\n  ordered = TRUE\n)\nses\n\n [1] Middle Middle Middle Low    High   Middle Middle Low    Middle Middle\n[11] Middle Middle Middle Middle High   Middle Middle High   Low    Low   \n[21] Middle Low    Middle Middle Middle Low    Middle Middle Low    Middle\n[31] Middle High   High   Low    Middle Low    Middle High   Low    Middle\n[41] Middle Middle Middle Middle Low    High   Low    Middle Middle Low   \n[51] Middle Low    Middle Middle Middle Low    Middle High   Low    High  \nLevels: Low &lt; Middle &lt; High"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#create-a-random-vector-to-use",
+    "href": "data-structures/data-structures.html#create-a-random-vector-to-use",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "3.1 Create a Random Vector to Use",
+    "text": "3.1 Create a Random Vector to Use\n\nses = sample(\n  x = c(\"Low\", \"Middle\", \"High\"),\n  size = 60,\n  replace = TRUE,\n  prob = c(25, 60, 15)\n)\nprint(ses)\n\n [1] \"Middle\" \"Middle\" \"Middle\" \"Low\"    \"High\"   \"Middle\" \"Middle\" \"Low\"   \n [9] \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"High\"   \"Middle\"\n[17] \"Middle\" \"High\"   \"Low\"    \"Low\"    \"Middle\" \"Low\"    \"Middle\" \"Middle\"\n[25] \"Middle\" \"Low\"    \"Middle\" \"Middle\" \"Low\"    \"Middle\" \"Middle\" \"High\"  \n[33] \"High\"   \"Low\"    \"Middle\" \"Low\"    \"Middle\" \"High\"   \"Low\"    \"Middle\"\n[41] \"Middle\" \"Middle\" \"Middle\" \"Middle\" \"Low\"    \"High\"   \"Low\"    \"Middle\"\n[49] \"Middle\" \"Low\"    \"Middle\" \"Low\"    \"Middle\" \"Middle\" \"Middle\" \"Low\"   \n[57] \"Middle\" \"High\"   \"Low\"    \"High\""
+  },
+  {
+    "objectID": "data-structures/data-structures.html#creating-matrices",
+    "href": "data-structures/data-structures.html#creating-matrices",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "5.1 Creating Matrices",
+    "text": "5.1 Creating Matrices\nThe matrix() function is the primary tool for creating matrices in R. Its general syntax is as follows:\n\nmatrix(data, nrow, ncol, byrow, dimnames)\n\nArguments\n\n\ndata\n\n\nVector containing the elements to fill the matrix.\n\n\nnrow\n\n\nNumber of rows.\n\n\nncol\n\n\nNumber of columns.\n\n\nbyrow\n\n\nLogical. TRUE fills matrix row-wise; FALSE (default) fills column-wise.\n\n\ndimnames\n\n\nList of character vectors providing row and column names.\n\n\n\n\n\n\n\n\nTipOptional Parameters\n\n\n\nSome parameters in the matrix() syntax are optional. The simplified syntax below is sufficient to create a matrix:\nM = matrix(data, nrow)\nIn such a case:\n\nNumber of columns is automatically calculated as:\n\\(\\qquad \\text{ncol} = \\dfrac{\\text{length(data)}}{\\text{nrow}}\\)\nArrangement: Elements fill the matrix column-wise (downwards) by default\nDimension names: None are assigned\n\n\n\nExample\n\nSolution\nBelow is the syntax for creating a matrix that holds the above data. Enter the values row by row, omitting the row and column totals—they will be computed once the matrix is created.\n\nv = c(\n  319, 738,\n  130, 329,\n  88, 402,\n  41, 95\n)\n\n# create row names and column names\nrow_names = c(\n  \"Currently married\",\n  \"Divorced or separated\",\n  \"Widowed\",\n  \"Never married\"\n)\ncol_names = c(\"Hispanic\", \"non Hispanic\")\n\n# create the matrix\ndata = matrix(\n  data = v,\n  nrow = 4,\n  ncol = 2,\n  byrow = TRUE,\n  dimnames = list(row_names, col_names)\n)\ndata = cbind(data, Total = rowSums(data)) # row totals\ndata = rbind(data, Total = colSums(data)) # column totals\nprint(data)\n\n                      Hispanic non Hispanic Total\nCurrently married          319          738  1057\nDivorced or separated      130          329   459\nWidowed                     88          402   490\nNever married               41           95   136\nTotal                      578         1564  2142"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#matrix-operations-and-statistical-functions",
+    "href": "data-structures/data-structures.html#matrix-operations-and-statistical-functions",
+    "title": "R Data Structures: Building the Architecture of Your Data",
+    "section": "5.2 Matrix operations and statistical functions",
+    "text": "5.2 Matrix operations and statistical functions\nContent"
+  },
+  {
+    "objectID": "data-structures/data-structures.html#matrix-indexing-and-slicing",
+    "href": "data-structures/data-structures.html#matrix-indexing-and-slicing",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "5.3 Matrix Indexing and Slicing",
+    "text": "5.3 Matrix Indexing and Slicing\nUse R’s indexing and slicing techniques to extract specific values, rows, columns, or combinations thereof from a matrix. The table below presents several examples."
+  },
+  {
+    "objectID": "data-structures/data-structures.html#matrix-operations-and-functions",
+    "href": "data-structures/data-structures.html#matrix-operations-and-functions",
+    "title": "R Data Structures: Engineering Intelligent Data Workflows",
+    "section": "5.2 Matrix Operations and Functions",
+    "text": "5.2 Matrix Operations and Functions\nThe following table presents some common operators and functions applicable to matrices."
+  },
+  {
+    "objectID": "data-structures/data-structures.html#parameters",
+    "href": "data-structures/data-structures.html#parameters",
+    "title": "R Data Structures: Building the Architecture of Your Data",
+    "section": "5.2 Parameters",
+    "text": "5.2 Parameters\nSome of the parameters in the syntax above are optional. The syntax, M = matrix(vector_with_matrix_elements, nrow = number of rows) is sufficient to generate a matrix with n rows. In this case, the number of columns is calculated as number of elementsnumber of rows and the elements are arranged in the matrix by the columns (i.e. downwards). In addition, the matrix created will not have row and column names."
+  },
+  {
+    "objectID": "temp/temp.html",
+    "href": "temp/temp.html",
+    "title": "Conditional Statements in R: XXX",
+    "section": "",
+    "text": "1 Introduction\nWelcome"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html",
+    "href": "user-defined-functions/user-defined-functions.html",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "",
+    "text": "A function in R is a block of reusable code that performs a specific task. Functions help avoid repetition, organize code, and enable modular programming.\nKey characteristics:\n\nTakes zero or more inputs (arguments)\nReturns a single output (can be a list, vector, or any object)\nHas its own local environment"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#function-arguments",
+    "href": "user-defined-functions/user-defined-functions.html#function-arguments",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.1 Function Arguments",
+    "text": "3.1 Function Arguments\nContent\n\n3.1.1 Positional Arguments\nContent\n\n\n3.1.2 Named Arguments\nContent\n\n\n3.1.3 Default Arguments\nContent\n\n\n3.1.4 Variable number of arguments (...)\nCaptures additional arguments to pass to other functions:"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#scope-and-environments",
+    "href": "user-defined-functions/user-defined-functions.html#scope-and-environments",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.2 Scope and Environments",
+    "text": "3.2 Scope and Environments\nContent\n\n3.2.1 Local vs Global Variables\nContent\n\n\n3.2.2 Lexical Scoping\nContent"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#returning-multiple-values",
+    "href": "user-defined-functions/user-defined-functions.html#returning-multiple-values",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.3 Returning Multiple Values",
+    "text": "3.3 Returning Multiple Values\nContent"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#anonymous-functions-lambdas",
+    "href": "user-defined-functions/user-defined-functions.html#anonymous-functions-lambdas",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.4 Anonymous Functions (Lambdas)",
+    "text": "3.4 Anonymous Functions (Lambdas)"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#error-handling",
+    "href": "user-defined-functions/user-defined-functions.html#error-handling",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.5 Error Handling",
+    "text": "3.5 Error Handling\nContent\n\n3.5.1 Using stop() and warning()\nContent\n\n\n3.5.2 Using tryCatch()\nContent"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#infix-functions",
+    "href": "user-defined-functions/user-defined-functions.html#infix-functions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.5 Infix Functions",
+    "text": "3.5 Infix Functions\nFunctions with special names wrapped in % can be used as operators:\n\n`%plus%` &lt;- function(a, b) {\n  return(a + b + 100)\n}\n3 %plus% 5\n\n[1] 108"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#subfunctions",
+    "href": "user-defined-functions/user-defined-functions.html#subfunctions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.7 Subfunctions",
+    "text": "3.7 Subfunctions\nA subfunction is a more informal term. It usually means:\n\nA helper function that supports a main function.\n\nKey idea:\n\nNot strictly defined by location\nCan be nested OR defined separately\nEmphasizes role, not structure\n\nKey difference\n\n\n\n\n\n\n\n\nAspect\nNested function\nSubfunction\n\n\n\n\nDefinition location\nInside another function\nInside or outside\n\n\nFocus\nStructure (scope-based)\nRole (helper function)\n\n\nScope access\nHas access to parent environment\nDepends on definition\n\n\nFormality\nMore formal term\nInformal term"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#key-difference",
+    "href": "user-defined-functions/user-defined-functions.html#key-difference",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.2 Key difference",
+    "text": "4.2 Key difference\n\n\n\n\n\n\n\n\nAspect\nNested function\nSubfunction\n\n\n\n\nDefinition location\nInside another function\nInside or outside\n\n\nFocus\nStructure (scope-based)\nRole (helper function)\n\n\nScope access\nHas access to parent environment\nDepends on definition\n\n\nFormality\nMore formal term\nInformal term"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#recursive-functions",
+    "href": "user-defined-functions/user-defined-functions.html#recursive-functions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.8 Recursive Functions",
+    "text": "3.8 Recursive Functions\nFunctions that call themselves (use with caution):"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#functionals-functions-that-work-on-functions",
+    "href": "user-defined-functions/user-defined-functions.html#functionals-functions-that-work-on-functions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.9 Functionals (Functions that Work on Functions)",
+    "text": "3.9 Functionals (Functions that Work on Functions)\nA functional is a function that takes another function as an argument or returns a function. Functionals are the foundation of elegant, loop-free R code.\n\n3.9.1 Why Functionals Matter\nInstead of writing loops:\n\nresult &lt;- list()\nfor(i in 1:10) {\n  result[[i]] &lt;- mean(my_list[[i]])\n}\n\nError:\n! object 'my_list' not found\n\n\nUse functional\n\nresult &lt;- lapply(my_list, mean)  # One line, no loop\n\nError:\n! object 'my_list' not found\n\n\n\n\n3.9.2 Common Functionals in Base R\n\n3.9.2.1 lapply() - List Apply\n\n\n3.9.2.2 sapply() - Simplified Apply\n\n\n3.9.2.3 Reduce() - Cumulative Application\n\n\n\n3.9.3 Common Functionals in purrr library\n\n3.9.3.1 map() - Type-Stable Alternative\n\n\n3.9.3.2 reduce() - Tidyverse Version"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#best-practices",
+    "href": "user-defined-functions/user-defined-functions.html#best-practices",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.6 Best Practices",
+    "text": "3.6 Best Practices\nBelow are a few Code Review Standards for Functions\n\n\n\n\n\n\n\nPractice\nWhy It Matters\n\n\n\n\nFunction name is a verb and noun\ncalculate_mean not calc_mean\n\n\nFewer than 5 arguments\nEasier to use, less confusion\n\n\nLess than 30 lines\nTestable, readable, debuggable\n\n\nNo side effects\nOnly uses inputs, only returns output\n\n\nInput validation\nFails fast with clear message\n\n\nDocumented with Roxygen2\nTeam can use without asking you\n\n\nHandles NA values\nProduction data always has gaps\n\n\nVectorized (no loops)\nWorks on real dataset sizes"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#common-mistakes-pitfalls",
+    "href": "user-defined-functions/user-defined-functions.html#common-mistakes-pitfalls",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.5 Common Mistakes & Pitfalls",
+    "text": "4.5 Common Mistakes & Pitfalls\n\n\n\n\n\n\n\n\nMistake\nExplanation\nFix\n\n\n\n\nModifying global variables\nCreates side effects\nReturn value and reassign\n\n\nForgetting return()\nLast value is returned (fine but explicit is clearer)\nUse return() for clarity\n\n\nVectorization issues\nUsing loops when vectorized ops exist\nUse +, *, ifelse()\n\n\nUsing = inside function calls\nConfuses assignment with argument matching\nUse &lt;- for assignment inside\n\n\nNot handling NA values\nFunctions fail silently\nUse na.rm = TRUE or handle explicitly"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#data-transformation-functions",
+    "href": "user-defined-functions/user-defined-functions.html#data-transformation-functions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.1 Data Transformation Functions",
+    "text": "4.1 Data Transformation Functions\nContent\nVariable creation function\nRecoding function"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#functionals",
+    "href": "user-defined-functions/user-defined-functions.html#functionals",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.3 Functionals",
+    "text": "4.3 Functionals\nThese are functions that work on functions."
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#data-cleaning",
+    "href": "user-defined-functions/user-defined-functions.html#data-cleaning",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.2 Data Cleaning",
+    "text": "4.2 Data Cleaning\nContent"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#data-export",
+    "href": "user-defined-functions/user-defined-functions.html#data-export",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.3 Data Export",
+    "text": "4.3 Data Export\nContent"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#presentation-tables",
+    "href": "user-defined-functions/user-defined-functions.html#presentation-tables",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "4.4 Presentation Tables",
+    "text": "4.4 Presentation Tables\nContent"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#types-of-fuctions",
+    "href": "user-defined-functions/user-defined-functions.html#types-of-fuctions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.4 Types of Fuctions",
+    "text": "3.4 Types of Fuctions\nContent\n\n3.4.1 Anonymous Functions (Lambdas)\nContent\n\n\n3.4.2 Infix Functions\nFunctions with special names wrapped in % can be used as operators:\n\n`%plus%` &lt;- function(a, b) {\n  return(a + b + 100)\n}\n3 %plus% 5\n\n[1] 108\n\n\n\n\n3.4.3 Nested Functions\nA nested function is a function defined inside another function.\nKey idea:\n\nDefined inside another function\nHas access to the outer function’s variables (lexical scoping in R)\nNot necessarily intended as a reusable “helper” outside\n\n\n\n3.4.4 Subfunctions\nA subfunction is a more informal term. It usually means:\n\nA helper function that supports a main function.\n\nKey idea:\n\nNot strictly defined by location\nCan be nested OR defined separately\nEmphasizes role, not structure\n\nKey difference between nested functions and subfunctions\n\n\n\n\n\n\n\n\nAspect\nNested function\nSubfunction\n\n\n\n\nDefinition location\nInside another function\nInside or outside\n\n\nFocus\nStructure (scope-based)\nRole (helper function)\n\n\nScope access\nHas access to parent environment\nDepends on definition\n\n\nFormality\nMore formal term\nInformal term\n\n\n\n\n\n3.4.5 Recursive Functions\nFunctions that call themselves (use with caution):\n\n\n3.4.6 Functionals (Functions that Work on Functions)\nA functional is a function that takes another function as an argument or returns a function. Functionals are the foundation of elegant, loop-free R code.\n\n3.4.6.1 Why Functionals Matter\nInstead of writing loops:\n\nresult &lt;- list()\nfor(i in 1:10) {\n  result[[i]] &lt;- mean(my_list[[i]])\n}\n\nError:\n! object 'my_list' not found\n\n\nUse functional\n\nresult &lt;- lapply(my_list, mean)  # One line, no loop\n\nError:\n! object 'my_list' not found\n\n\n\n\n3.4.6.2 Common Functionals in Base R\n\n3.4.6.2.1 lapply() - List Apply\n\n\n3.4.6.2.2 sapply() - Simplified Apply\n\n\n3.4.6.2.3 Reduce() - Cumulative Application\n\n\n\n3.4.6.3 Common Functionals in purrr library\n\n3.4.6.3.1 map() - Type-Stable Alternative\n\n\n3.4.6.3.2 reduce() - Tidyverse Version\n\n\n\n\n3.4.7 Which Functional to Use?\n\n\n\n\n\n\n\n\n\nTask\nRecommended\nAlternative\nWhy\n\n\n\n\nApply to list, keep as list\nlapply()\nmap()\nMost flexible\n\n\nApply, simplify if possible\nsapply()\nmap_*()\nConvenient but risky\n\n\nProduction code\nvapply()\nmap_dbl()\nType-safe, fast\n\n\nMultiple input vectors\nmapply()\nmap2(), pmap()\nHandles 2+ arguments\n\n\nGrouped operations\ntapply()\ndplyr::group_by()\nBase R option"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#which-functional-to-use",
+    "href": "user-defined-functions/user-defined-functions.html#which-functional-to-use",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.10 Which Functional to Use?",
+    "text": "3.10 Which Functional to Use?\n\n\n\n\n\n\n\n\n\nTask\nRecommended\nAlternative\nWhy\n\n\n\n\nApply to list, keep as list\nlapply()\nmap()\nMost flexible\n\n\nApply, simplify if possible\nsapply()\nmap_*()\nConvenient but risky\n\n\nProduction code\nvapply()\nmap_dbl()\nType-safe, fast\n\n\nMultiple input vectors\nmapply()\nmap2(), pmap()\nHandles 2+ arguments\n\n\nGrouped operations\ntapply()\ndplyr::group_by()\nBase R option"
+  },
+  {
+    "objectID": "user-defined-functions/user-defined-functions.html#nested-functions",
+    "href": "user-defined-functions/user-defined-functions.html#nested-functions",
+    "title": "User-Defined Functions: Building Reusable Analytics Code",
+    "section": "3.6 Nested Functions",
+    "text": "3.6 Nested Functions\nA nested function is a function defined inside another function.\nKey idea:\n\nDefined inside another function\nHas access to the outer function’s variables (lexical scoping in R)\nNot necessarily intended as a reusable “helper” outside"
+  },
+  {
+    "objectID": "exercises/data-management-and-statistical-analysis.html",
+    "href": "exercises/data-management-and-statistical-analysis.html",
+    "title": "Exercise",
+    "section": "",
+    "text": "Deliverables for Trainees\nAfter the exercise, each trainee submits:\nDataset and Variables\nLoad Required Libraries\nlibrary(readxl)\nlibrary(tidyverse)\nlibrary(broom)\nlibrary(labelled)\nlibrary(janitor)\nlibrary(arsenal)\nlibrary(gt)"
+  },
+  {
+    "objectID": "exercises/data-management-and-statistical-analysis.html#key-findings",
+    "href": "exercises/data-management-and-statistical-analysis.html#key-findings",
+    "title": "Exercise",
+    "section": "8.1 Key Findings",
+    "text": "8.1 Key Findings\n\n8.1.1 Prevalence of Food Insecurity\n\nApproximately 31% of households are food insecure, indicating a substantial vulnerability within the population.\nFood insecurity is more prevalent in the South (30%) compared to the North (27%), highlighting regional disparities.\n\n\n\n8.1.2 Training and Food Security\n\nHouseholds that attended resilience training show slightly lower food insecurity (29%) compared to non-attendees (32%).\nHowever, statistical tests (Chi-square and logistic regression) show no significant relationship, suggesting that training alone may not be sufficient to reduce food insecurity.\n\n\n\n8.1.3 Determinants of Resilience\n\nLinear regression results show that: - Number of meals per day is the strongest predictor of resilience → Each additional meal increases resilience by ~5.7 points (p &lt; 0.001) - Region is also significant\n→ Households in the South have ~8 points lower resilience\nOther factors (training, agro-diversity, distance to water) were not statistically significant\nThe model explains ~13.7% of variation in resilience, indicating that additional factors (e.g., income, assets) likely play a role\n\n\n\n8.1.4 Determinants of Food Insecurity\n\nLogistic regression identifies resilience score as the strongest predictor: - Each unit increase in resilience reduces odds of food insecurity by ~5% (p &lt; 0.001)\nDistance to water shows a positive but weak relationship: - Each additional kilometer increases odds of food insecurity by ~6% (not statistically significant)\nTraining, agro-diversity, and region show no significant effects\n\n\n\n8.1.5 Relationships Between Key Variables\n\nThere is no significant correlation between resilience and agro-diversity\nA significant relationship exists between distance to water and number of meals, suggesting water access may indirectly affect food consumption\n\n\n\n8.1.6 Impact of Training\n\nIndependent t-test results suggest that training is associated with higher resilience scores\nHowever, this effect is not consistent across models, indicating possible confounding factors"
+  },
+  {
+    "objectID": "exercises/data-management-and-statistical-analysis.html#overall-conclusions",
+    "href": "exercises/data-management-and-statistical-analysis.html#overall-conclusions",
+    "title": "Exercise",
+    "section": "8.2 Overall Conclusions",
+    "text": "8.2 Overall Conclusions\n\nFood access (meals per day) and resilience capacity are the most critical drivers of household well-being\nResilience plays a central protective role, significantly reducing the likelihood of food insecurity\nRegional disparities persist, with the South consistently worse off\nTraining programs alone show limited impact, suggesting a need for more comprehensive or better-targeted interventions\n\n\n8.2.1 Policy Implications\n\nPrioritize interventions that improve household food access\nStrengthen programs aimed at building resilience capacity\nAddress regional inequalities, particularly in the South\nReassess and enhance training program effectiveness\nImprove access to water, which may indirectly influence food security\n\n\n\n8.2.2 Final Remark\nWhile the models are statistically significant, their explanatory power is modest, indicating that food insecurity and resilience are complex, multi-dimensional issues requiring broader socio-economic considerations."
+  }
+]
